@@ -23,11 +23,6 @@ class SfdfBasic extends ORM
         }
     }
 
-    public function getID()
-	{
-		return $this->{'ID'};
-	}
-
     public function getName()
 	{
 		return $this->{'name'};

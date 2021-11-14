@@ -32,9 +32,7 @@ class BuildClassFile
     {
         $entity = include('./entities/' . $this->className . '.php');
         // ID IS HARDCODED!
-        $concatString = $this->fileContentGetter;
-        $concatString = str_replace('###value###', 'ID', $concatString);
-        $concatString = str_replace('###VALUE###', ucfirst('ID'), $concatString);
+        $concatString = '';
         foreach ($entity as $column) {
             $this->virtualCheck = [];
             if (isset($column['virtual']) && $column['virtual']) {
