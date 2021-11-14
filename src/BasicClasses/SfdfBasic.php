@@ -7,6 +7,9 @@ use PS\Source\Core\ORM;
 
 class SfdfBasic extends ORM
 {
+    const NAME = 'name';
+    const RANDNUMBER = 'randNumber';
+    const SDA = 'sda';
 
     const REQUIRED_VALUES = ['randNumber', 'sda'];
 

@@ -7,6 +7,8 @@ use PS\Source\Core\ORM;
 
 class UserBasic extends ORM
 {
+    const NAME = 'name';
+    const RANDNUMBER = 'randNumber';
 
     const REQUIRED_VALUES = [];
 

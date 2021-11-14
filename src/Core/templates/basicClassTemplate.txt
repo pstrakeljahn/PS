@@ -7,7 +7,7 @@ use PS\Source\Core\ORM;
 
 class ###className###Basic extends ORM
 {
-
+###definitionOfAttr###
     const REQUIRED_VALUES = [###requiredValues###];
 
     public function __construct()

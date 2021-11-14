@@ -19,11 +19,25 @@ class BuildClassFile
     {
         $this->fileContent = str_replace('###seperator###', "explode('\\\', __CLASS__);", $this->fileContent);
         $this->fileContent = str_replace('###className###', $this->className, $this->fileContent);
+        $this->fileContent = str_replace('###definitionOfAttr###', $this->prepareProperties(), $this->fileContent);
         $this->prepareRequiredValues();
         if (file_put_contents($this->fileName, $this->fileContent) !== false && $this->prepareSetterGetter() && $this->prepareClass($this->className)) {
             return true;
         }
         return false;
+    }
+
+    private function prepareProperties()
+    {
+        $entity = include('./entities/' . $this->className . '.php');
+        $returnString = '';
+        foreach ($entity as $column) {
+            if (isset($column['virtual']) && $column['virtual']) {
+                continue;
+            }
+            $returnString = $returnString . '    const ' . strtoupper($column['name']) . ' = \'' . $column['name'] . '\';' . PHP_EOL;
+        }
+        return $returnString;
     }
 
     private function prepareSetterGetter(): bool
