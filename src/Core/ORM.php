@@ -10,7 +10,7 @@ class ORM
     public function getByPK(int $id)
     {
         $table = self::getClassName() . 's';
-        $db = self::connector();
+        $db = new DBConnector();
         $db->query("SELECT * FROM `$table` WHERE ID =:id");
         $db->bind(':id', $id);
         $result =  $db->resultSet();
@@ -38,11 +38,6 @@ class ORM
             }
         }
         return $output;
-    }
-
-    protected static function connector()
-    {
-        return new DBConnector();
     }
 
     public function add(string $column, $value, $isNull = null): self
@@ -93,7 +88,7 @@ class ORM
         unset($this->searchString);
         unset($this->orderBy);
         unset($this->limit);
-        $db = self::connector();
+        $db = new DBConnector();
         $db->query($query);
         return $this->prepareResult($db->resultSet());
     }
@@ -106,8 +101,7 @@ class ORM
         $this->checkValidity();
 
         // create a new entry
-        $db = self::connector();
-        // $this->checkValidity();
+        $db = new DBConnector();
         if (is_null($this->getID())) {
             $query = 'INSERT INTO ' . strtolower(self::getClassName()) . 's (';
             $valueString = '';
@@ -154,7 +148,7 @@ class ORM
         if (is_null($this->getID())) {
             return false;
         }
-        $db = self::connector();
+        $db = new DBConnector();
         $query = 'DELETE FROM ' . strtolower(self::getClassName()) . 's  WHERE id=' . $this->getID() . ';';
         $db->query($query);
         $db->execute();
