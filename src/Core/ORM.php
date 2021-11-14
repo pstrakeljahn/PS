@@ -3,14 +3,9 @@
 namespace PS\Source\Core;
 
 use Exception;
-use PS\Source\Classes\User;
 
 class ORM
 {
-
-    public function __construct()
-    {
-    }
 
     public function getByPK(int $id)
     {
