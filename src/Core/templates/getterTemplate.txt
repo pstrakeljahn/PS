@@ -1,0 +1,4 @@
+
+    public function get###VALUE###() {
+		return $this->{'###value###'};
+	}
