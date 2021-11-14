@@ -1,4 +1,5 @@
 
-    public function get###VALUE###() {
+    public function get###VALUE###()
+	{
 		return $this->{'###value###'};
 	}

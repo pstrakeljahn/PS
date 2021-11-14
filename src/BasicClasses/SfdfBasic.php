@@ -5,27 +5,31 @@ namespace PS\Source\BasicClasses;
 use Exception;
 use PS\Source\Core\ORM;
 
-class SfdfBasic extends ORM {
+class SfdfBasic extends ORM
+{
 
     const REQUIRED_VALUES = ['randNumber', 'sda'];
-    
-    public function __construct() {
-        if(!file_exists('./entities/'.self::getClassName().'.php')){
+
+    public function __construct()
+    {
+        if (!file_exists('./entities/' . self::getClassName() . '.php')) {
             throw new Exception('Cannot instantiate class! Entity file missing.');
         }
-        $entity = include('./entities/'.self::getClassName().'.php');
+        $entity = include('./entities/' . self::getClassName() . '.php');
         // ID IS HARDCODED!
         $this->{'ID'} = null;
-        foreach($entity as $column){
+        foreach ($entity as $column) {
             $this->{$column['name']} = null;
         }
     }
 
-    public function getID() {
+    public function getID()
+	{
 		return $this->{'ID'};
 	}
 
-    public function getName() {
+    public function getName()
+	{
 		return $this->{'name'};
 	}
 
@@ -35,7 +39,8 @@ class SfdfBasic extends ORM {
 		return $this;
 	}
 
-    public function getRandNumber() {
+    public function getRandNumber()
+	{
 		return $this->{'randNumber'};
 	}
 
@@ -45,7 +50,8 @@ class SfdfBasic extends ORM {
 		return $this;
 	}
 
-    public function getSda() {
+    public function getSda()
+	{
 		return $this->{'sda'};
 	}
 

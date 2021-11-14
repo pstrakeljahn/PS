@@ -8,6 +8,7 @@ use PS\Source\BasicClasses\###className###Basic;
 *   Logic can be implemented here that is not overwritten
 */
 
-class ###className### extends ###className###Basic{
+class ###className### extends ###className###Basic
+{
     
 }

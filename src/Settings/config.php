@@ -3,7 +3,7 @@
 namespace PS\Source\Settings;
 
 class Config
-   {
+{
 
     // AUTOLOADER CONFIG
     const PREFIX = 'PS\\Source\\';
@@ -14,5 +14,4 @@ class Config
     const USERNAME = 'root';
     const PASSWORD = '';
     const DATABASE = 'test';
-
 }

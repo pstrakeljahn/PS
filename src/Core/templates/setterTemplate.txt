@@ -1,4 +1,5 @@
 
-	public function set###VALUE###($val) {
+	public function set###VALUE###($val)
+	{
 		$this->{'###value###'} = $val;
 	}

@@ -1,96 +1,99 @@
-<?php 
+<?php
 
 namespace PS\Source\Core;
 
 use Exception;
 use PS\Source\Classes\User;
 
-class ORM {
+class ORM
+{
 
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
     public function getByPK(int $id)
     {
-        $table = self::getClassName().'s';
+        $table = self::getClassName() . 's';
         $db = self::connector();
         $db->query("SELECT * FROM `$table` WHERE ID =:id");
         $db->bind(':id', $id);
         $result =  $db->resultSet();
-        if(!count($result)){
+        if (!count($result)) {
             throw new Exception('Not found!');
         }
         return $this->prepareResult($result)[0];
     }
-    
+
 
     public function prepareResult($result): array
     {
         $output = [];
-        if($result){
-            foreach($result as $row) {
-                $instanceName = '\PS\Source\Classes\\'.self::getClassName();
+        if ($result) {
+            foreach ($result as $row) {
+                $instanceName = '\PS\Source\Classes\\' . self::getClassName();
                 $selfInstance = new $instanceName();
-                foreach($selfInstance as $key => &$value){
-                    if(ctype_digit($row[$key])){
+                foreach ($selfInstance as $key => &$value) {
+                    if (ctype_digit($row[$key])) {
                         $row[$key] = (int)$row[$key];
                     }
                     $value = $row[$key];
                 }
                 $output[] = $selfInstance;
             }
-            
         }
         return $output;
     }
 
-    protected static function connector(){
+    protected static function connector()
+    {
         return new DBConnector();
     }
 
     public function add(string $column, $value, $isNull = null): self
-        {	
-                switch($isNull){
-                case null:
-                    $tmpQuery = 'WHERE '.$column.' = \''.$value.'\'';
-                    break;
-                case 'isNotNull':
-                    $tmpQuery = 'WHERE '.$column.' IS NOT NULL';
-                    break;
-                case 'isNull':
-                    $tmpQuery = 'WHERE '.$column.' IS NULL';
-                    break;
-                }
+    {
+        switch ($isNull) {
+            case null:
+                $tmpQuery = 'WHERE ' . $column . ' = \'' . $value . '\'';
+                break;
+            case 'isNotNull':
+                $tmpQuery = 'WHERE ' . $column . ' IS NOT NULL';
+                break;
+            case 'isNull':
+                $tmpQuery = 'WHERE ' . $column . ' IS NULL';
+                break;
+        }
 
-            if(!isset($this->searchString)){
-                $this->searchString = $tmpQuery;
-            } else {	
-                $this->searchString = $this->searchString.' AND '.substr($tmpQuery, 6);
-            }	
-            return $this;
-    }
-
-    public function orderBy(string $column, string $order) {
-        if($order === 'ASC' || $order === 'DESC'){
-            $this->orderBy = 'ORDER BY '.$column.' '.$order;
+        if (!isset($this->searchString)) {
+            $this->searchString = $tmpQuery;
+        } else {
+            $this->searchString = $this->searchString . ' AND ' . substr($tmpQuery, 6);
         }
         return $this;
     }
 
-    public function limit(int $limit) {
+    public function orderBy(string $column, string $order)
+    {
+        if ($order === 'ASC' || $order === 'DESC') {
+            $this->orderBy = 'ORDER BY ' . $column . ' ' . $order;
+        }
+        return $this;
+    }
+
+    public function limit(int $limit)
+    {
         $this->limit = $limit;
         return $this;
     }
 
     public function go(): array
     {
-        $query = 'SELECT * FROM '.strtolower(self::getClassName()).'s '.$this->searchString;
-        if(isset($this->orderBy)){
-            $query = $query.' '.$this->orderBy;
+        $query = 'SELECT * FROM ' . strtolower(self::getClassName()) . 's ' . $this->searchString;
+        if (isset($this->orderBy)) {
+            $query = $query . ' ' . $this->orderBy;
         }
-        if(isset($this->limit)) {
-            $query = $query.' LIMIT '.$this->limit;
+        if (isset($this->limit)) {
+            $query = $query . ' LIMIT ' . $this->limit;
         }
         unset($this->searchString);
         unset($this->orderBy);
@@ -102,29 +105,29 @@ class ORM {
 
     public function save()
     {
-        if(isset($this->searchString)){
+        if (isset($this->searchString)) {
             unset($this->searchString);
         }
         $this->checkValidity();
-        
+
         // create a new entry
         $db = self::connector();
         // $this->checkValidity();
-        if(is_null($this->getID())){
-            $query = 'INSERT INTO '.strtolower(self::getClassName()).'s (';
+        if (is_null($this->getID())) {
+            $query = 'INSERT INTO ' . strtolower(self::getClassName()) . 's (';
             $valueString = '';
-            foreach($this as $key => $value){
-                if($key === 'ID'){
+            foreach ($this as $key => $value) {
+                if ($key === 'ID') {
                     continue;
                 }
-                $query = $query.$key.', ';
-                if(is_null($value)){
-                    $valueString = $valueString.'NULL, ';
+                $query = $query . $key . ', ';
+                if (is_null($value)) {
+                    $valueString = $valueString . 'NULL, ';
                 } else {
-                    $valueString = $valueString.'\''.$value.'\''.', ';
+                    $valueString = $valueString . '\'' . $value . '\'' . ', ';
                 }
             }
-            $query = substr($query,0,-2).') VALUES ('.substr($valueString,0,-2).');';
+            $query = substr($query, 0, -2) . ') VALUES (' . substr($valueString, 0, -2) . ');';
 
             $db->query($query);
             $db->execute();
@@ -133,17 +136,17 @@ class ORM {
             return $this;
         }
         // update entry
-        if(!is_null($this->getID())){
-            $query = 'UPDATE '.strtolower(self::getClassName()).'s SET';
+        if (!is_null($this->getID())) {
+            $query = 'UPDATE ' . strtolower(self::getClassName()) . 's SET';
             $valueString = '';
-            foreach($this as $key => $value){
-                if($key === 'ID'){
-                    $condition = ' WHERE ID = '.$value.';';
+            foreach ($this as $key => $value) {
+                if ($key === 'ID') {
+                    $condition = ' WHERE ID = ' . $value . ';';
                     continue;
                 }
-                $query = $query.' '.$key.' = \''.$value.'\', ';
+                $query = $query . ' ' . $key . ' = \'' . $value . '\', ';
             }
-            $query = substr($query,0,-2).$condition;
+            $query = substr($query, 0, -2) . $condition;
             $db->query($query);
             $db->execute();
             return $this;
@@ -153,34 +156,34 @@ class ORM {
 
     public function delete(): bool
     {
-        if(is_null($this->getID())){
+        if (is_null($this->getID())) {
             return false;
         }
         $db = self::connector();
-        $query = 'DELETE FROM '.strtolower(self::getClassName()).'s  WHERE id='.$this->getID().';';
+        $query = 'DELETE FROM ' . strtolower(self::getClassName()) . 's  WHERE id=' . $this->getID() . ';';
         $db->query($query);
         $db->execute();
         return true;
     }
 
-    public function getID() {
-		return $this->{'ID'};
-	}
+    public function getID()
+    {
+        return $this->{'ID'};
+    }
 
     private function checkValidity(): void
     {
-        foreach($this as $key => $value){
-            $instanceName = '\PS\Source\Classes\\'.self::getClassName();
-            if(in_array($key, $instanceName::REQUIRED_VALUES) && is_null($this->{$key})){
-                throw new Exception($key.' is required!');
+        foreach ($this as $key => $value) {
+            $instanceName = '\PS\Source\Classes\\' . self::getClassName();
+            if (in_array($key, $instanceName::REQUIRED_VALUES) && is_null($this->{$key})) {
+                throw new Exception($key . ' is required!');
             }
         }
     }
 
-    protected static function getClassName(): string {
-        $calledClass = explode('\\',get_called_class());
+    protected static function getClassName(): string
+    {
+        $calledClass = explode('\\', get_called_class());
         return $calledClass[count($calledClass) - 1];
     }
-
 }
-

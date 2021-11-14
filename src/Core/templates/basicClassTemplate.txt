@@ -5,18 +5,20 @@ namespace PS\Source\BasicClasses;
 use Exception;
 use PS\Source\Core\ORM;
 
-class ###className###Basic extends ORM {
+class ###className###Basic extends ORM
+{
 
     const REQUIRED_VALUES = [###requiredValues###];
-    
-    public function __construct() {
-        if(!file_exists('./entities/'.self::getClassName().'.php')){
+
+    public function __construct()
+    {
+        if (!file_exists('./entities/' . self::getClassName() . '.php')) {
             throw new Exception('Cannot instantiate class! Entity file missing.');
         }
-        $entity = include('./entities/'.self::getClassName().'.php');
+        $entity = include('./entities/' . self::getClassName() . '.php');
         // ID IS HARDCODED!
         $this->{'ID'} = null;
-        foreach($entity as $column){
+        foreach ($entity as $column) {
             $this->{$column['name']} = null;
         }
     }

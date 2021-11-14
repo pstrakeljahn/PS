@@ -16,19 +16,16 @@ class DBConnector
 	private $dbh;
 	private $error;
 	private $stmt;
-	
+
 	public function __construct()
 	{
-		$dsn = 'mysql:host='.$this->db_host.';dbname='.$this->db_name;
+		$dsn = 'mysql:host=' . $this->db_host . ';dbname=' . $this->db_name;
 		$db_options = array(
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 		);
-		try
-		{
+		try {
 			$this->dbh = new PDO($dsn, $this->db_user, $this->db_pass, $db_options);
-		}
-		catch(PDOException $e)
-		{
+		} catch (PDOException $e) {
 			echo $this->error = $e->getMessage();
 		}
 	}
@@ -36,14 +33,12 @@ class DBConnector
 	public function query($query)
 	{
 		$this->stmt = $this->dbh->prepare($query);
-	}	
-	
+	}
+
 	public function bind($param, $value, $type = null)
 	{
-		if(is_null($type))
-		{
-			switch(true)
-			{
+		if (is_null($type)) {
+			switch (true) {
 				case is_int($value);
 					$type = PDO::PARAM_INT;
 					break;
@@ -58,7 +53,7 @@ class DBConnector
 					break;
 			}
 		}
-		$this->stmt->bindValue($param, $value, $type); 	
+		$this->stmt->bindValue($param, $value, $type);
 	}
 
 	public function execute($array = null)
@@ -74,7 +69,7 @@ class DBConnector
 	public function rowCount()
 	{
 		return $this->stmt->rowCount();
-	}	
+	}
 
 	public function result($array = null)
 	{
@@ -91,6 +86,5 @@ class DBConnector
 	public function close()
 	{
 		return $this->dbh = null;
-	}	
-
+	}
 }
