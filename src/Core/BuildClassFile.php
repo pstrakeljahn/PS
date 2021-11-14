@@ -13,8 +13,8 @@ class BuildClassFile
 
         $this->fileContent = file_get_contents($this->templatePath . 'basicClassTemplate.txt');
         $this->fileContentGetterSetter = file_get_contents($this->templatePath . 'getterSetterTemplate.txt');
-        $this->fileContentGetter = file_get_contents($this->templatePath . 'getterTemplate.txt');
-        $this->fileContentSetter = file_get_contents($this->templatePath . 'setterTemplate.txt');
+        // $this->fileContentGetter = file_get_contents($this->templatePath . 'getterTemplate.txt');
+        // $this->fileContentSetter = file_get_contents($this->templatePath . 'setterTemplate.txt');
     }
 
     public function execute(): bool

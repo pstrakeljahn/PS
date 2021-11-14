@@ -1,5 +1,0 @@
-
-	public function set###VALUE###($val)
-	{
-		$this->{'###value###'} = $val;
-	}
