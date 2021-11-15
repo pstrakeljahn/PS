@@ -2,14 +2,13 @@
 
 use PS\Source\BasicClasses\UserBasic;
 use PS\Source\Classes\sfdf;
-use PS\Source\Classes\User;
 use PS\Source\Core\ClassBuilder;
 
 require_once __DIR__ . '/autoload.php';
 
 $t = new ClassBuilder();
 $t->buildClass();
-// $check = new User();
+$check = new PS\Source\Classes\User();
 // $check->add(User::NAME, 'aaa');
 // $check->add(User::RANDNUMBER, 3);
 // $res = $check->go();

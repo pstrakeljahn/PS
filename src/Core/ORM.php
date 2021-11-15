@@ -15,7 +15,7 @@ class ORM
         $db->bind(':id', $id);
         $result =  $db->resultSet();
         if (!count($result)) {
-            throw new Exception('Not found!');
+            return null;
         }
         return $this->prepareResult($result)[0];
     }

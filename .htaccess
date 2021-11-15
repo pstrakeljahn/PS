@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /bbb/
+
+RewriteRule ^(api\/v1\/.*)$ index.php [QSA,L]
