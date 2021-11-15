@@ -36,6 +36,10 @@ class Router
             return;
         } else if (empty($arrUrl[1])) {
             /////////////// @todo success
+            $instance = new $className();
+            $res = $instance->go();
+            echo json_encode($res);
+            return;
         };
         if (isset($arrUrl[1]) && is_numeric($arrUrl[1])) {
             $objInstance = new $className();
@@ -45,6 +49,8 @@ class Router
                 return;
             }
             /////////////// @todo success
+            echo json_encode($obj);
+            return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1])) {
             echo 'ID has to be a number!';
             return;

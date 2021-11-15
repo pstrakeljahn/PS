@@ -78,15 +78,18 @@ class ORM
 
     public function go(): array
     {
-        $query = 'SELECT * FROM ' . strtolower(self::getClassName()) . 's ' . $this->searchString;
+        $query = 'SELECT * FROM ' . strtolower(self::getClassName()) . 's ';
+        if (isset($this->searchString)) {
+            $query = $query  . $this->searchString;
+        }
         if (isset($this->orderBy)) {
             $query = $query . ' ' . $this->orderBy;
         }
         if (isset($this->limit)) {
             $query = $query . ' LIMIT ' . $this->limit;
         }
-        unset($this->searchString);
         unset($this->orderBy);
+        unset($this->searchString);
         unset($this->limit);
         $db = new DBConnector();
         $db->query($query);
