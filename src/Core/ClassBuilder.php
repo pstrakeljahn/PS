@@ -98,7 +98,7 @@ class ClassBuilder extends DBConnector
                 $onUpdate = strtoupper($entity['ref_update']);
                 $onDelete = strtoupper($entity['ref_delete']);
                 if (in_array($onUpdate, self::KEYWORDS) && in_array($onDelete, self::KEYWORDS)) {
-                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` CHANGE `' . $entity['name'] . '` `' . $entity['name'] . '` INT(11) UNSIGNED NOT NULL';
+                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` CHANGE `' . $entity['name'] . '` `' . $entity['name'] . '` INT(11) UNSIGNED';
                     $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` ADD CONSTRAINT `FK_' . $entity['reference'] . $className . '` FOREIGN KEY (`' . $entity['name'] . '`) REFERENCES `' . strtolower($entity['reference']) . 's`(`' . $entity['ref_column'] . '`) ON DELETE ' . $onDelete . ' ON UPDATE ' . $onUpdate;
                 }
             }
