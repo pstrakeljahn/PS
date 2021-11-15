@@ -17,7 +17,16 @@ return [
     [
         'name' => 'sda',
         'type' => 'enum',
-        'values' => ['aaa','bbb','ccc'],
+        'values' => ['aaa', 'bbb', 'ccc'],
         'required' => true
     ],
+    [
+        'name' => 'UserID',
+        'type' => 'int',
+        'length' => 11,
+        'reference' => 'User',
+        'ref_column' => 'ID',
+        'ref_delete' => 'CASCADE',
+        'ref_update' => 'CASCADE'
+    ]
 ];

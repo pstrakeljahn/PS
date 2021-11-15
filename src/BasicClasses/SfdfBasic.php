@@ -10,6 +10,7 @@ class SfdfBasic extends ORM
     const NAME = 'name';
     const RANDNUMBER = 'randNumber';
     const SDA = 'sda';
+    const USERID = 'UserID';
 
     const REQUIRED_VALUES = ['randNumber', 'sda'];
 
@@ -56,6 +57,17 @@ class SfdfBasic extends ORM
 	public function setSda($val): self
 	{
 		$this->{'sda'} = $val;
+		return $this;
+	}
+
+    public function getUserID()
+	{
+		return $this->{'UserID'};
+	}
+
+	public function setUserID($val): self
+	{
+		$this->{'UserID'} = $val;
 		return $this;
 	}
 }

@@ -7,9 +7,11 @@ use PS\Source\Core\DBConnector;
 
 class ClassBuilder extends DBConnector
 {
+    const KEYWORDS = ['CASCADE', 'SET NULL', 'NO ACTION', 'RESTRICT'];
 
     public function __construct()
     {
+        $this->keyConstraints = [];
         $this->arrEntitites = glob('./entities/*.php');
     }
 
@@ -36,6 +38,16 @@ class ClassBuilder extends DBConnector
                 throw new \Exception('Cannot create BasicClass ' . $className);
             }
             echo 'BasicClass ' . $className . ' created.<br><br>';
+            $this->fetchKeyConstraints();
+        }
+    }
+
+    private function fetchKeyConstraints()
+    {
+        foreach ($this->keyConstraints as $query) {
+            $db = new DBConnector();
+            $db->query($query);
+            $db->execute();
         }
     }
 
@@ -82,14 +94,21 @@ class ClassBuilder extends DBConnector
             if (isset($entity['notnull']) && $entity['notnull']) {
                 $query = $query . "NOT NULL";
             }
+            if (isset($entity['reference']) && $entity['ref_column'] && isset($entity['ref_update']) && isset($entity['ref_delete'])) {
+                $onUpdate = strtoupper($entity['ref_update']);
+                $onDelete = strtoupper($entity['ref_delete']);
+                if (in_array($onUpdate, self::KEYWORDS) && in_array($onDelete, self::KEYWORDS)) {
+                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` CHANGE `' . $entity['name'] . '` `' . $entity['name'] . '` INT(11) UNSIGNED NOT NULL';
+                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` ADD CONSTRAINT `FK_' . $entity['reference'] . $className . '` FOREIGN KEY (`' . $entity['name'] . '`) REFERENCES `' . strtolower($entity['reference']) . 's`(`' . $entity['ref_column'] . '`) ON DELETE ' . $onDelete . ' ON UPDATE ' . $onUpdate;
+                }
+            }
 
             $query = $query . ",";
         }
         $query = $query . "PRIMARY KEY  (`ID`)) ENGINE = InnoDB;";
         $db = new DBConnector();
         $db->query($query);
-        $test = $db->execute();
-        return $test;
+        return $db->execute();
     }
 
     private function generateBasicClass(string $className): bool
