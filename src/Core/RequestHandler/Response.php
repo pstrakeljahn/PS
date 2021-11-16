@@ -18,7 +18,7 @@ class Response
     const STATUS_CODE_OK = 200;
     const STATUS_CODE_NOTFOUND = 404;
 
-    protected static function generateResponse($obj, $error, $id = null)
+    protected static function generateResponse($obj, $error)
     {
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
