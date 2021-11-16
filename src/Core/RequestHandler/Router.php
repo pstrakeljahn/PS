@@ -41,7 +41,7 @@ class Router extends Request
         } else if (empty($arrUrl[1]) && $this->method = 'GET') {
             $instance = new $className();
             $res = $instance->go();
-            call_user_func_array([$this, $this->method], [$res, $_GET, $_POST]);
+            call_user_func_array([$this, $this->method], [$res, $_GET, $_POST, $error]);
             return;
         };
         if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
