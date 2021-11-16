@@ -2,7 +2,9 @@
 
 namespace PS\Source\Core;
 
-class Router
+use  PS\Source\Core\Request;
+
+class Router extends Request
 {
     const CREATE = 'create';
     const READ = 'read';
@@ -10,10 +12,10 @@ class Router
     const DELETE = 'delete';
 
     const CRUD_OPERATIONS_METHOD = [
-        self::CREATE => 'POST',
-        self::READ => 'GET',
-        self::UPDATE => 'PATCH',
-        self::DELETE => 'DELETE'
+        'POST',
+        'GET',
+        'PATCH',
+        'DELETE'
     ];
 
     public function __construct()
@@ -28,49 +30,31 @@ class Router
     public function run()
     {
         // check obj endpoint
-        preg_match('/^.*(api\/v1\/)(.*)$/', $this->path, $match);
+        preg_match('/^.*(api\/v1\/obj\/)(.*)$/', $this->path, $match);
         $arrUrl = explode('/', $match[count($match) - 1]);
         $className = '\PS\Source\Classes\\' . ucfirst($arrUrl[0]);
         if (!class_exists($className)) {
-            echo self::doesNotExist($className, null);
+            echo 'Object' . $className . 'does not exist!';
             return;
-        } else if (empty($arrUrl[1])) {
-            /////////////// @todo success
+        } else if (empty($arrUrl[1]) && $this->method = 'GET') {
             $instance = new $className();
             $res = $instance->go();
-            echo json_encode($res);
+            call_user_func_array([$this, $this->method], [$res, $_GET, $_POST]);
             return;
         };
-        if (isset($arrUrl[1]) && is_numeric($arrUrl[1])) {
+        if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
+            $error = null;
             if (is_null($obj)) {
-                echo self::doesNotExist($className, $arrUrl[1]);
-                return;
+                $error = 404;
             }
-            /////////////// @todo success
-            echo json_encode($obj);
+            // single object selected
+            call_user_func_array([$this, $this->method], [[$obj], $_GET, $_POST, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1])) {
             echo 'ID has to be a number!';
             return;
         };
-        if (empty($arrUrl[2])) {
-            $arrUrl[2] = self::READ;
-        }
-        if (in_array($arrUrl[2], array_keys(self::CRUD_OPERATIONS_METHOD)) && $this->method === self::CRUD_OPERATIONS_METHOD[$arrUrl[2]]) {
-            /////////////// @todo success
-        } else if (!in_array($arrUrl[2], array_keys(self::CRUD_OPERATIONS_METHOD))) {
-            echo 'Method ' . $arrUrl[2] . ' does not exist!';
-            return;
-        } else {
-            echo 'Method ' . $arrUrl[2] . ' not allowed!';
-            return;
-        };
-    }
-
-    public static function doesNotExist($classname, $id)
-    {
-        return 'Object' . $classname . ($id ? ' with ID ' . $id . ' ' : ' ') . 'does not exist!';
     }
 }
