@@ -10,12 +10,13 @@ class Response
         'error' => null
     ];
 
+    const FALLBACK_ERROR_MESSAGES = [
+        400 => 'BAD REQUEST',
+        404 => 'NOT FOUND',
+    ];
+
     const STATUS_CODE_OK = 200;
     const STATUS_CODE_NOTFOUND = 404;
-
-    public function __construct()
-    {
-    }
 
     protected static function generateResponse($obj, $statusCode, $error, $id = null)
     {
@@ -27,13 +28,8 @@ class Response
         $response = self::BODY;
         $response['status'] = isset($error['code']) ? $error['code'] : $statusCode;
         $response['data'] = $obj;
-        $response['error'] = (is_null($error['message']) ? sprintf(self::ERROR_MESSAGES[$error['code']], $id) : $error['message']);
+        $response['error'] = (is_null($error['message']) ? sprintf(self::FALLBACK_ERROR_MESSAGES[$error['code']], $id) : $error['message']);
 
         echo json_encode($response);
     }
-
-    const ERROR_MESSAGES = [
-        400 => 'BAD REQUEST',
-        404 => 'Object with ID %d was not found',
-    ];
 }

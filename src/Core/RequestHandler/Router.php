@@ -48,7 +48,7 @@ class Router extends Request
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
             if (is_null($obj)) {
-                $error['code'] = 404;
+                $error = ['code' => 404, 'message' => 'Object with ID ' . (int)$arrUrl[1] . ' was not found'];
             }
             // single object selected
             call_user_func_array([$this, $this->method], [[$obj], $_GET, $_POST, $error, (int)$arrUrl[1]]);
