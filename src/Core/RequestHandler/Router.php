@@ -54,7 +54,7 @@ class Router extends Request
             call_user_func_array([$this, $this->method], [[$obj], $_GET, $_POST, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
-            $error = ['code' => 400, 'message' => 'aa'];
+            $error = ['code' => 400, 'message' => 'ID has to be an int!'];
             call_user_func_array([$this, $this->method], [null, $_GET, $_POST, $error, (int)$arrUrl[1]]);
             return;
         };
