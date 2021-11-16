@@ -1,8 +1,8 @@
 <?php
 
-namespace PS\Source\Core;
+namespace PS\Source\Core\RequestHandler;
 
-use PS\Source\Core\Response;
+use PS\Source\Core\RequestHandler\Response;
 
 class Request extends Response
 {

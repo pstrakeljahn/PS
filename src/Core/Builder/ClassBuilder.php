@@ -1,6 +1,6 @@
 <?php
 
-namespace PS\Source\Core;
+namespace PS\Source\Core\Builder;
 
 use Exception;
 use PS\Source\Core\DBConnector;

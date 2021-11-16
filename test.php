@@ -1,8 +1,6 @@
 <?php
 
-use PS\Source\BasicClasses\UserBasic;
-use PS\Source\Classes\sfdf;
-use PS\Source\Core\ClassBuilder;
+use PS\Source\Core\Builder\ClassBuilder;
 
 require_once __DIR__ . '/autoload.php';
 

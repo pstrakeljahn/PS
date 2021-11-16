@@ -1,8 +1,8 @@
 <?php
 
-namespace PS\Source\Core;
+namespace PS\Source\Core\RequestHandler;
 
-use  PS\Source\Core\Request;
+use  PS\Source\Core\RequestHandler\Request;
 
 class Router extends Request
 {
