@@ -8,7 +8,7 @@ class Request extends Response
 {
     public function get($obj, $get, $post, $error = null, $id = null)
     {
-        $this->generateResponse($obj, Response::STATUS_CODE_OK, $error, $id);
+        $this->generateResponse($obj, $error, $id);
     }
 
     protected function post($obj, $get, $post, $error = null, $id = null)
