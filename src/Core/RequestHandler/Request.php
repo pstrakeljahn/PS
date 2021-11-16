@@ -8,11 +8,7 @@ class Request extends Response
 {
     public function get($obj, $get, $post, $error = null, $id = null)
     {
-        if ($error === Response::STATUS_CODE_NOTFOUND) {
-            $this->generateResponse($obj, Response::STATUS_CODE_NOTFOUND, $error, $id);
-            return;
-        }
-        $this->generateResponse($obj, Response::STATUS_CODE_OK, $error);
+        $this->generateResponse($obj, Response::STATUS_CODE_OK, $error, $id);
     }
 
     protected function post($obj, $get, $post, $error = null, $id = null)

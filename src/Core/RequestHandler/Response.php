@@ -22,10 +22,10 @@ class Response
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
         header('Content-Type: application/json');
-        http_response_code($statusCode);
-        header('Status: ' . $statusCode);
+        http_response_code($error ?? $statusCode);
+        header('Status: ' . $error ?? $statusCode);
         $response = self::BODY;
-        $response['status'] = $statusCode;
+        $response['status'] = $error ?? $statusCode;
         $response['data'] = $obj;
         $response['error'] = !is_null($error) ? sprintf(self::ERROR_MESSAGES[$error], $id) : null;
 
@@ -33,6 +33,7 @@ class Response
     }
 
     const ERROR_MESSAGES = [
-        404 => 'Object with ID %d was not found'
+        400 => 'BAD REQUEST',
+        404 => 'Object with ID %d was not found',
     ];
 }
