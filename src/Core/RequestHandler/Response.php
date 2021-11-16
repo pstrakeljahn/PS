@@ -22,12 +22,12 @@ class Response
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
         header('Content-Type: application/json');
-        http_response_code($error ?? $statusCode);
-        header('Status: ' . $error ?? $statusCode);
+        http_response_code(isset($error['code']) ? $error['code'] : $statusCode);
+        header('Status: ' . (isset($error['code']) ? $error['code'] : $statusCode));
         $response = self::BODY;
-        $response['status'] = $error ?? $statusCode;
+        $response['status'] = isset($error['code']) ? $error['code'] : $statusCode;
         $response['data'] = $obj;
-        $response['error'] = !is_null($error) ? sprintf(self::ERROR_MESSAGES[$error], $id) : null;
+        $response['error'] = (is_null($error['message']) ? sprintf(self::ERROR_MESSAGES[$error['code']], $id) : $error['message']);
 
         echo json_encode($response);
     }

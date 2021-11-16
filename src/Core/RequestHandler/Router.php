@@ -33,8 +33,10 @@ class Router extends Request
         preg_match('/^.*(api\/v1\/obj\/)(.*)$/', $this->path, $match);
         $arrUrl = explode('/', $match[count($match) - 1]);
         $className = '\PS\Source\Classes\\' . ucfirst($arrUrl[0]);
+        $error = ['code' => null, 'message' => null];
         if (!class_exists($className)) {
-            echo 'Object' . $className . 'does not exist!';
+            $error = ['code' => 404, 'message' => 'Object' . $className . ' does not exist!'];
+            call_user_func_array([$this, $this->method], [[], $_GET, $_POST, $error]);
             return;
         } else if (empty($arrUrl[1]) && $this->method = 'GET') {
             $instance = new $className();
@@ -45,15 +47,15 @@ class Router extends Request
         if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
-            $error = null;
             if (is_null($obj)) {
-                $error = 404;
+                $error['code'] = 404;
             }
             // single object selected
             call_user_func_array([$this, $this->method], [[$obj], $_GET, $_POST, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
-            call_user_func_array([$this, $this->method], [null, $_GET, $_POST, 400, (int)$arrUrl[1]]);
+            $error = ['code' => 400, 'message' => 'aa'];
+            call_user_func_array([$this, $this->method], [null, $_GET, $_POST, $error, (int)$arrUrl[1]]);
             return;
         };
     }
