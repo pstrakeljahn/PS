@@ -4,7 +4,7 @@ namespace PS\Source\Core;
 
 use Exception;
 
-class ORM
+class DB
 {
 
     public function getByPK(int $id)

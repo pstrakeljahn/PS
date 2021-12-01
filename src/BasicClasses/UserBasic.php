@@ -3,9 +3,9 @@
 namespace PS\Source\BasicClasses;
 
 use Exception;
-use PS\Source\Core\ORM;
+use PS\Source\Core\DB;
 
-class UserBasic extends ORM
+class UserBasic extends DB
 {
     const NAME = 'name';
     const RANDNUMBER = 'randNumber';
@@ -26,24 +26,24 @@ class UserBasic extends ORM
     }
 
     public function getName()
-	{
-		return $this->{'name'};
-	}
+    {
+        return $this->{'name'};
+    }
 
-	public function setName($val): self
-	{
-		$this->{'name'} = $val;
-		return $this;
-	}
+    public function setName($val): self
+    {
+        $this->{'name'} = $val;
+        return $this;
+    }
 
     public function getRandNumber()
-	{
-		return $this->{'randNumber'};
-	}
+    {
+        return $this->{'randNumber'};
+    }
 
-	public function setRandNumber($val): self
-	{
-		$this->{'randNumber'} = $val;
-		return $this;
-	}
+    public function setRandNumber($val): self
+    {
+        $this->{'randNumber'} = $val;
+        return $this;
+    }
 }

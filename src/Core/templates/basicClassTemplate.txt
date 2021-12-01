@@ -3,9 +3,9 @@
 namespace PS\Source\BasicClasses;
 
 use Exception;
-use PS\Source\Core\ORM;
+use PS\Source\Core\DB;
 
-class ###className###Basic extends ORM
+class ###className###Basic extends DB
 {
 ###definitionOfAttr###
     const REQUIRED_VALUES = [###requiredValues###];

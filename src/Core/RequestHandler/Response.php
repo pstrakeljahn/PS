@@ -18,15 +18,15 @@ class Response
     const STATUS_CODE_OK = 200;
     const STATUS_CODE_NOTFOUND = 404;
 
-    protected static function generateResponse($obj, $error)
+    protected static function generateResponse($obj, $error, $statusCode = null)
     {
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
         header('Content-Type: application/json');
-        http_response_code(isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK);
-        header('Status: ' . (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK));
+        http_response_code($statusCode ?? (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK));
+        header('Status: ' . ($statusCode ?? (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK)));
         $response = self::BODY;
-        $response['status'] = isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK;
+        $response['status'] = $statusCode ?? (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK);
         $response['data'] = $obj;
         $response['error'] = !is_null($error['code']) ?
             (is_null($error['message']) ? self::FALLBACK_ERROR_MESSAGES[$error['code']] : $error['message'])
