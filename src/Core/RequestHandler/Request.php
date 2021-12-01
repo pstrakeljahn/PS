@@ -45,5 +45,7 @@ class Request extends Response
 
     protected function delete($obj, $get, $post, $input, $error = null, $id = null)
     {
+        $obj->delete();
+        $this->generateResponse(null, $error);
     }
 }

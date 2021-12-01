@@ -36,7 +36,7 @@ class Router extends Request
         $error = ['code' => null, 'message' => null];
         $input = file_get_contents('php://input');
         if (!class_exists($className)) {
-            $error = ['code' => 404, 'message' => 'Object' . $className . ' does not exist!'];
+            $error = ['code' => Response::STATUS_CODE_NOTFOUND, 'message' => 'Object' . $className . ' does not exist!'];
             call_user_func_array([$this, $this->method], [[], $_GET, $_POST, $input, $error]);
             return;
         } else if (empty($arrUrl[1]) && $this->method === 'GET') {
@@ -47,24 +47,24 @@ class Router extends Request
             return;
         } else if (empty($arrUrl[1]) && $this->method === 'POST') {
             if (!count($_POST) && empty($input)) {
-                $error = ['code' => 400, 'message' => 'Request body is empty'];
+                $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'Request body is empty'];
                 $this->generateResponse(null, $error);
                 return;
             }
             call_user_func_array([$this, $this->method], [new $className(), $_GET, $_POST, $input, $error]);
             return;
         };
-        if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, ['GET', 'PATCH'])) {
+        if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, ['GET', 'PATCH', 'DELETE'])) {
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
             if (is_null($obj)) {
-                $error = ['code' => 404, 'message' => 'Object with ID ' . (int)$arrUrl[1] . ' was not found'];
+                $error = ['code' => Response::STATUS_CODE_NOTFOUND, 'message' => 'Object with ID ' . (int)$arrUrl[1] . ' was not found'];
             }
             // single object selected
             call_user_func_array([$this, $this->method], [$obj, $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
-            $error = ['code' => 400, 'message' => 'ID has to be an int!'];
+            $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'ID has to be an int!'];
             call_user_func_array([$this, $this->method], [null, $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
             return;
         };

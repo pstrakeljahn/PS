@@ -13,7 +13,7 @@ class RequestHelper
         }
         if (count($missingParams)) {
             $obj = null;
-            $error = ['code' => 400, 'message' => 'Missing parameters: ' . implode($missingParams)];
+            $error = ['code' => Response::STATUS_CODE_NOT_MODIFIED, 'message' => 'Missing parameters: ' . implode($missingParams)];
         } else {
             foreach ($requestData as $key => $data) {
                 if ($key === 'ID') {

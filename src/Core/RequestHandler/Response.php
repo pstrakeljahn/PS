@@ -16,6 +16,8 @@ class Response
     ];
 
     const STATUS_CODE_OK = 200;
+    const STATUS_CODE_NOT_MODIFIED = 304;
+    const STATUS_CODE_BAD_REQUEST = 400;
     const STATUS_CODE_NOTFOUND = 404;
 
     protected static function generateResponse($obj, $error, $statusCode = null)
