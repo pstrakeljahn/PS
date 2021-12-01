@@ -136,7 +136,12 @@ class DB
                     $condition = ' WHERE ID = ' . $value . ';';
                     continue;
                 }
-                $query = $query . ' ' . $key . ' = \'' . $value . '\', ';
+                if (!is_null($value)) {
+                    $value = '\'' . $value . '\'';
+                } else {
+                    $value = 'NULL';
+                }
+                $query = $query . ' ' . $key . ' = ' . $value . ', ';
             }
             $query = substr($query, 0, -2) . $condition;
             $db->query($query);

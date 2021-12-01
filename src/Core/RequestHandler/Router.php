@@ -54,14 +54,14 @@ class Router extends Request
             call_user_func_array([$this, $this->method], [new $className(), $_GET, $_POST, $input, $error]);
             return;
         };
-        if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
+        if (isset($arrUrl[1]) && is_numeric($arrUrl[1]) && in_array($this->method, ['GET', 'PATCH'])) {
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
             if (is_null($obj)) {
                 $error = ['code' => 404, 'message' => 'Object with ID ' . (int)$arrUrl[1] . ' was not found'];
             }
             // single object selected
-            call_user_func_array([$this, $this->method], [[$obj], $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
+            call_user_func_array([$this, $this->method], [$obj, $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
             $error = ['code' => 400, 'message' => 'ID has to be an int!'];
