@@ -64,8 +64,16 @@ class Router extends Request
             call_user_func_array([$this, $this->method], [$obj, $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
             return;
         } else if (isset($arrUrl[1]) && !is_numeric($arrUrl[1]) && in_array($this->method, self::CRUD_OPERATIONS_METHOD)) {
-            $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'ID has to be an int!'];
+            if ($arrUrl[1] !== "") {
+                $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'ID has to be an int!'];
+            } else {
+                $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'Wrong usage'];
+            }
             call_user_func_array([$this, $this->method], [null, $_GET, $_POST, $input, $error, (int)$arrUrl[1]]);
+            return;
+        } else {
+            $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'Wrong usage'];
+            call_user_func_array([$this, $this->method], [null, $_GET, $_POST, $input, $error]);
             return;
         };
     }
