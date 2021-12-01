@@ -11,8 +11,9 @@ class Response
     ];
 
     const FALLBACK_ERROR_MESSAGES = [
+        304 => 'NOT MODIFIED',
         400 => 'BAD REQUEST',
-        404 => 'NOT FOUND',
+        404 => 'NOT FOUND'
     ];
 
     const STATUS_CODE_OK = 200;
