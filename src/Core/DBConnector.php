@@ -8,10 +8,10 @@ use PS\Source\Settings\Config;
 
 class DBConnector
 {
-	private string $db_host = Config::SERVERNAME;
-	private string $db_name = Config::DATABASE;
-	private string $db_user = Config::USERNAME;
-	private string	$db_pass = Config::PASSWORD;
+	private $db_host = Config::SERVERNAME;
+	private $db_name = Config::DATABASE;
+	private $db_user = Config::USERNAME;
+	private	$db_pass = Config::PASSWORD;
 
 	private $dbh;
 	private $error;
