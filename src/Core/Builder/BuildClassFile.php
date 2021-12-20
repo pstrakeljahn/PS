@@ -29,7 +29,7 @@ class BuildClassFile
     private function prepareProperties()
     {
         $entity = include('./entities/' . $this->className . '.php');
-        $returnString = '';
+        $returnString = '    const ID = \'ID\';' . PHP_EOL;;
         foreach ($entity as $column) {
             if (isset($column['virtual']) && $column['virtual']) {
                 continue;
