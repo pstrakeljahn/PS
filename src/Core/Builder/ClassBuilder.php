@@ -97,6 +97,9 @@ class ClassBuilder extends DBConnector
             if (isset($entity['notnull']) && $entity['notnull']) {
                 $query = $query . "NOT NULL";
             }
+            if (isset($entity['unique']) && $entity['unique']) {
+                $query = $query . " UNIQUE";
+            }
             if ($entity['type'] === 'bool' && isset($entity['default'])) {
                 if ($entity['default'] === true || $entity['default'] === false) {
                     $default = $entity['default'] ? '1' : '0';
