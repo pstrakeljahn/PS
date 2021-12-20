@@ -21,6 +21,7 @@ class ClassBuilder extends DBConnector
         foreach ($this->arrEntitites as $entity) {
             // @todo DAS MUSS NOCH BESSER!
             $arrPath = explode(DIRECTORY_SEPARATOR, $entity);
+            // @todo this might be wrong!!!
             $className = ucfirst(substr($arrPath[count($arrPath) - 1], 11, -4));
 
             // Check Validity
@@ -57,7 +58,7 @@ class ClassBuilder extends DBConnector
         foreach ($arrEntity as $entity) {
             if (
                 isset($entity['name']) && isset($entity['type']) &&
-                ($entity['type'] !== 'enum' && isset($entity['length']) || $entity['type'] === 'enum' && isset($entity['values'])) || ($entity['type'] === 'datetime' && !isset($entity['length']))
+                ($entity['type'] === 'bool' || $entity['type'] !== 'enum' && isset($entity['length']) || $entity['type'] === 'enum' && isset($entity['values'])) || ($entity['type'] === 'datetime' && !isset($entity['length']))
             ) {
                 continue;
             }
@@ -88,11 +89,19 @@ class ClassBuilder extends DBConnector
                 $query = $query . "`" . $entity['name'] . "` ENUM (" . $enumValues . ") ";
             } elseif ($entity['type'] === 'datetime') {
                 $query = $query . "`" . $entity['name'] . "` " . $entity['type'] . " ";
+            } elseif ($entity['type'] === 'bool') {
+                $query = $query . "`" . $entity['name'] . "` boolean ";
             } else {
                 $query = $query . "`" . $entity['name'] . "` " . $entity['type'] . "(" . $entity['length'] . ") ";
             }
             if (isset($entity['notnull']) && $entity['notnull']) {
                 $query = $query . "NOT NULL";
+            }
+            if ($entity['type'] === 'bool' && isset($entity['default'])) {
+                if ($entity['default'] === true || $entity['default'] === false) {
+                    $default = $entity['default'] ? '1' : '0';
+                    $query = $query . "DEFAULT " . $default;
+                }
             }
             if (isset($entity['reference']) && $entity['ref_column'] && isset($entity['ref_update']) && isset($entity['ref_delete'])) {
                 $onUpdate = strtoupper($entity['ref_update']);
