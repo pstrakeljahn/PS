@@ -35,6 +35,11 @@ class BuildClassFile
                 continue;
             }
             $returnString = $returnString . '    const ' . strtoupper($column['name']) . ' = \'' . $column['name'] . '\';' . PHP_EOL;
+            if ($column['type'] === 'enum') {
+                foreach ($column['values'] as $value) {
+                    $returnString = $returnString . '    const ENUM_' . strtoupper($column['name']) . '_' . strtoupper($value) . ' = \'' . $value . '\';' . PHP_EOL;
+                }
+            }
         }
         return $returnString;
     }
