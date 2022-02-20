@@ -9,7 +9,7 @@ class DB
 
     public function getByPK(int $id)
     {
-        $table = self::getClassName() . 's';
+        $table = lcfirst(self::getClassName()) . 's';
         $db = new DBConnector();
         $db->query("SELECT * FROM `$table` WHERE ID =:id");
         $db->bind(':id', $id);
