@@ -27,10 +27,9 @@ class Router extends Request
         }
     }
 
-    public function run()
+    public function run($match)
     {
         // check obj endpoint
-        preg_match('/^.*(api\/v1\/obj\/)(.*)$/', $this->path, $match);
         $arrUrl = explode('/', $match[count($match) - 1]);
         $className = '\PS\Source\Classes\\' . ucfirst($arrUrl[0]);
         $error = ['code' => null, 'message' => null];

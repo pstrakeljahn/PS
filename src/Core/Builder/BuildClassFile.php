@@ -20,7 +20,7 @@ class BuildClassFile
         $this->fileContent = str_replace('###className###', $this->className, $this->fileContent);
         $this->fileContent = str_replace('###definitionOfAttr###', $this->prepareProperties(), $this->fileContent);
         $this->prepareRequiredValues();
-        if (file_put_contents($this->fileName, $this->fileContent) !== false && $this->prepareSetterGetter() && $this->prepareClass($this->className)) {
+        if (file_put_contents($this->fileName, $this->fileContent) !== false && $this->prepareSetterGetter() && $this->prepareClass($this->virtualCheck)) {
             return true;
         }
         return false;
@@ -52,7 +52,6 @@ class BuildClassFile
         foreach ($entity as $column) {
             $this->virtualCheck = [];
             if (isset($column['virtual']) && $column['virtual']) {
-                $this->virtualCheck[] = $column['name'];
                 continue;
             }
             $concatString = $concatString . $this->fileContentGetterSetter;
@@ -72,20 +71,18 @@ class BuildClassFile
     {
         $fileName = './src/Classes/' . $this->className . '.php';
         if (file_exists($fileName)) {
-            foreach ($this->virtualCheck as $name) {
-                // @todo DAS GEHT SO NICHT!
-                $namespace = '\PS\Source\Classes\\' . $this->className;
-                $methodVariable = array(new $namespace(), 'get' . ucfirst($name) . '()');
-                $test = is_callable($methodVariable, false, $callable_name);
-                if (is_callable($methodVariable, true, $callable_name)) {
-                    echo $callable_name . ' is not callable! <br>';
-                }
-                $methodVariable = array(new $this->className(), 'set' . ucfirst($name));
-                if (is_callable($methodVariable, true, $callable_name)) {
-                    echo $callable_name . ' is not callable! <br>';
+            $entity = include('./entities/' . $this->className . '.php');
+            foreach ($entity as $column) {
+                if (isset($column['virtual']) && $column['virtual']) {
+                    $namespace = '\PS\Source\Classes\\' . $this->className;
+                    if (!method_exists(new $namespace(), 'get' . ucfirst($column['name']))) {
+                        echo $namespace. '::get' . ucfirst($column['name']) . '() is not callable! <br>';
+                    }
+                    if (!method_exists(new $namespace(), 'set' . ucfirst($column['name']))) {
+                        echo $namespace. '::set' . ucfirst($column['name']) . '() is not callable! <br>';
+                    }
                 }
             }
-            echo 'ClassFile already exists.<br>';
             return true;
         }
         $fileContent = file_get_contents($this->templatePath . 'classTemplate.txt');

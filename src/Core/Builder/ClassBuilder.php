@@ -58,7 +58,7 @@ class ClassBuilder extends DBConnector
         foreach ($arrEntity as $entity) {
             if (
                 isset($entity['name']) && isset($entity['type']) &&
-                ($entity['type'] === 'bool' || $entity['type'] !== 'enum' && isset($entity['length']) || $entity['type'] === 'enum' && isset($entity['values'])) || ($entity['type'] === 'datetime' && !isset($entity['length']))
+                (($entity['type'] === 'decimal' && isset($entity['range'])) || $entity['type'] === 'bool' || $entity['type'] !== 'enum' && isset($entity['length']) || $entity['type'] === 'enum' && isset($entity['values'])) || ($entity['type'] === 'datetime' && !isset($entity['length']))
             ) {
                 continue;
             }
@@ -91,6 +91,8 @@ class ClassBuilder extends DBConnector
                 $query = $query . "`" . $entity['name'] . "` " . $entity['type'] . " ";
             } elseif ($entity['type'] === 'bool') {
                 $query = $query . "`" . $entity['name'] . "` boolean ";
+            } elseif ($entity['type'] === 'decimal') {
+                $query = $query . "`" . $entity['name'] . "` " . $entity['type'] . "(" . $entity['range'] . ") ";
             } else {
                 $query = $query . "`" . $entity['name'] . "` " . $entity['type'] . "(" . $entity['length'] . ") ";
             }
@@ -111,7 +113,7 @@ class ClassBuilder extends DBConnector
                 $onDelete = strtoupper($entity['ref_delete']);
                 if (in_array($onUpdate, self::KEYWORDS) && in_array($onDelete, self::KEYWORDS)) {
                     $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` CHANGE `' . $entity['name'] . '` `' . $entity['name'] . '` INT(11) UNSIGNED';
-                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` ADD CONSTRAINT `FK_' . $entity['reference'] . $className . '` FOREIGN KEY (`' . $entity['name'] . '`) REFERENCES `' . strtolower($entity['reference']) . 's`(`' . $entity['ref_column'] . '`) ON DELETE ' . $onDelete . ' ON UPDATE ' . $onUpdate;
+                    $this->keyConstraints[] = 'ALTER TABLE `' . strtolower($className) . 's` ADD CONSTRAINT `FK_' . $entity['reference'] . $className . count($this->keyConstraints) .'` FOREIGN KEY (`' . $entity['name'] . '`) REFERENCES `' . strtolower($entity['reference']) . 's`(`' . $entity['ref_column'] . '`) ON DELETE ' . $onDelete . ' ON UPDATE ' . $onUpdate;
                 }
             }
 
