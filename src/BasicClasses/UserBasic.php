@@ -7,6 +7,7 @@ use PS\Source\Core\DB;
 
 class UserBasic extends DB
 {
+    const ID = 'ID';
     const NAME = 'name';
     const RANDNUMBER = 'randNumber';
 
@@ -14,10 +15,10 @@ class UserBasic extends DB
 
     public function __construct()
     {
-        if (!file_exists('./entities/' . self::getClassName() . '.php')) {
+        if (!file_exists('./../entities/' . self::getClassName() . '.php')) {
             throw new Exception('Cannot instantiate class! Entity file missing.');
         }
-        $entity = include('./entities/' . self::getClassName() . '.php');
+        $entity = include('./../entities/' . self::getClassName() . '.php');
         // ID IS HARDCODED!
         $this->{'ID'} = null;
         foreach ($entity as $column) {
@@ -26,24 +27,24 @@ class UserBasic extends DB
     }
 
     public function getName()
-    {
-        return $this->{'name'};
-    }
+	{
+		return $this->{'name'};
+	}
 
-    public function setName($val): self
-    {
-        $this->{'name'} = $val;
-        return $this;
-    }
+	public function setName($val): self
+	{
+		$this->{'name'} = $val;
+		return $this;
+	}
 
     public function getRandNumber()
-    {
-        return $this->{'randNumber'};
-    }
+	{
+		return $this->{'randNumber'};
+	}
 
-    public function setRandNumber($val): self
-    {
-        $this->{'randNumber'} = $val;
-        return $this;
-    }
+	public function setRandNumber($val): self
+	{
+		$this->{'randNumber'} = $val;
+		return $this;
+	}
 }

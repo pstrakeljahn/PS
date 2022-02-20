@@ -10,8 +10,8 @@ class Config
     const BASE_DIR = __DIR__ . '/src/';
 
     // DATABASE CONNECTION
-    const SERVERNAME = 'localhost';
-    const USERNAME = 'root';
-    const PASSWORD = '';
-    const DATABASE = 'test';
+    const SERVERNAME = 'remotemysql.com';
+    const USERNAME = 'IPmfcZfgac';
+    const PASSWORD = 'vcXPRziApZ';
+    const DATABASE = 'IPmfcZfgac';
 }

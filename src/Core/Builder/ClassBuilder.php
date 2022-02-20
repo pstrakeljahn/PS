@@ -22,7 +22,7 @@ class ClassBuilder extends DBConnector
             // @todo DAS MUSS NOCH BESSER!
             $arrPath = explode(DIRECTORY_SEPARATOR, $entity);
             // @todo this might be wrong!!!
-            $className = ucfirst(substr($arrPath[count($arrPath) - 1], 11, -4));
+            $className = ucfirst(substr($arrPath[count($arrPath) - 1], 0, -4));
 
             // Check Validity
             if (!$this->checkEntityValidity(include $entity)) {
@@ -39,8 +39,8 @@ class ClassBuilder extends DBConnector
                 throw new \Exception('Cannot create BasicClass ' . $className);
             }
             echo 'BasicClass ' . $className . ' created.<br><br>';
-            $this->fetchKeyConstraints();
         }
+        $this->fetchKeyConstraints();
     }
 
     private function fetchKeyConstraints()

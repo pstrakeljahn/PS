@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /bbb/
+RewriteBase /PS/
 
 RewriteRule ^(api\/v1\/.*)$ api.php [QSA,L]
 RewriteRule ^(.*)$ api.php [QSA,L]
