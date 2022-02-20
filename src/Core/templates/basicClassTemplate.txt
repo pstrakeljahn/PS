@@ -12,10 +12,11 @@ class ###className###Basic extends DB
 
     public function __construct()
     {
-        if (!file_exists('./../entities/' . self::getClassName() . '.php')) {
+        $entityPath = __DIR__.'/../../entities/' . self::getClassName() . '.php';
+        if (!file_exists($entityPath)) {
             throw new Exception('Cannot instantiate class! Entity file missing.');
         }
-        $entity = include('./../entities/' . self::getClassName() . '.php');
+        $entity = include($entityPath);
         // ID IS HARDCODED!
         $this->{'ID'} = null;
         foreach ($entity as $column) {
