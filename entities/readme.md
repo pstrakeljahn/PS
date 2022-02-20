@@ -2,11 +2,12 @@ How to use the entity-Builder:
 
     [
         'name'* => Attribute name,  can not be an int
-        'type'* => Typ (int, varchar, bool, enum, datetime),
+        'type'* => Typ (int, varchar, bool, enum, datetime, decimal),
         'length'* => length,
         'required' => this attribute is necessary (bool)
         'values' => if enum: array of values
         'notnull' => not null (bool)
+        'range' => x,y (decimal)
 
         // necessary for FKs
         'reference' => 'User',
