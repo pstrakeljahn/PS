@@ -13,15 +13,17 @@ class Response
     const FALLBACK_ERROR_MESSAGES = [
         304 => 'NOT MODIFIED',
         400 => 'BAD REQUEST',
+        403 => 'FORBIDDEN',
         404 => 'NOT FOUND'
     ];
 
     const STATUS_CODE_OK = 200;
     const STATUS_CODE_NOT_MODIFIED = 304;
     const STATUS_CODE_BAD_REQUEST = 400;
+    const STATUS_CODE_FORBIDDEN = 403;
     const STATUS_CODE_NOTFOUND = 404;
 
-    protected static function generateResponse($obj, $error, $statusCode = null)
+    public static function generateResponse($obj, $error, $statusCode = null)
     {
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");

@@ -24,6 +24,7 @@ class Router extends Request
     {
         $this->path = $_SERVER['REDIRECT_URL'];
         $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->input = "";
         if (substr($this->path, -1) !== "/") {
             $this->path = $this->path . '/';
         }

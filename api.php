@@ -1,7 +1,8 @@
 <?php
 
-use PS\Source\Core\Jwt\SessionHandler;
+use PS\Source\Core\RequestHandler\Response;
 use PS\Source\Core\RequestHandler\Router;
+use PS\Source\Core\Session\SessionHandler;
 
 require_once __DIR__ . '/autoload.php';
 
@@ -15,10 +16,13 @@ if(count($login)) {
     $router->login();
     return;
 }
-
 if (count($match)) {
-    $router = new Router();
-    $router->run($match);
+    if(SessionHandler::loggedIn()) {
+        $router = new Router();
+        $router->run($match);
+    } else {
+        Response::generateResponse(array(), ['code' => Response::STATUS_CODE_FORBIDDEN, 'message' => 'Please lock in!']);
+    }
 } elseif (count($cronjob)) {
     return include('./cronjob.php');
 } elseif (count($build)) {
