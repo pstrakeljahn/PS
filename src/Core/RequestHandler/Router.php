@@ -94,7 +94,9 @@ class Router extends Request
             $obj = ['login', array()];
             if (count($user)) {
                 if (password_verify($this->input['password'], $user[0]->getPassword())) {
-                    $token = TokenHelper::createToken();
+                    $token = TokenHelper::createToken($user[0]);
+                    $error['code'] = self::STATUS_CODE_OK;
+                    $error['message'] = null;
                     $obj = ['login', array('token' => $token)];
                 }
             }
