@@ -15,16 +15,16 @@ class Request extends Response
     {
         $requestData = $post;
         if (!empty($input)) {
-            $requestData = json_decode($input, true);
+                $requestData = is_array($input) ? $input : json_decode($input, true);
         }
-        if (!is_null($obj)) {
+        if (!is_null($obj) && $obj[0] !== "login") {
             try {
-                $obj = RequestHelper::insertDataIntoObject($obj, $requestData, true);
+                $obj = RequestHelper::insertDataIntoObject($obj, $requestData ?? array(), true);
             } catch (\Exception $e) {
                 $error = json_decode($e->getMessage(), true);
             }
         }
-        $this->generateResponse($obj, $error);
+        $this->generateResponse($obj[0] === "login" ? $obj[1] : $obj, $error);
     }
 
     protected function patch($obj, $get, $post, $input, $error = null, $id = null)

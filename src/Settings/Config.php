@@ -14,4 +14,8 @@ class Config
     const USERNAME = 'IPmfcZfgac';
     const PASSWORD = 'vcXPRziApZ';
     const DATABASE = 'IPmfcZfgac';
+
+    // JWT Configuration (exp in seconds / null is forever)
+    const SECRET = "asjdfhkj&/(13asd";
+    const EXPIRATION = "9999999999999";
 }

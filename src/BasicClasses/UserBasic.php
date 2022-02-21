@@ -10,6 +10,7 @@ class UserBasic extends DB
     const ID = 'ID';
     const USERNAME = 'username';
     const PASSWORD = 'password';
+    const MAIL = 'mail';
     const FIRSTNAME = 'firstname';
     const SURNAME = 'surname';
     const DATEOFBIRTH = 'dateofbirth';
@@ -22,7 +23,7 @@ class UserBasic extends DB
     const ENUM_ROLE_ADMIN = 'admin';
     const ENUM_ROLE_USER = 'user';
 
-    const REQUIRED_VALUES = ['username', 'password', 'firstname', 'surname', 'role'];
+    const REQUIRED_VALUES = ['username', 'password', 'mail', 'firstname', 'surname', 'role'];
 
     public function __construct()
     {
@@ -57,6 +58,17 @@ class UserBasic extends DB
 	public function setPassword($val): self
 	{
 		$this->{'password'} = $val;
+		return $this;
+	}
+
+    public function getMail()
+	{
+		return $this->{'mail'};
+	}
+
+	public function setMail($val): self
+	{
+		$this->{'mail'} = $val;
 		return $this;
 	}
 

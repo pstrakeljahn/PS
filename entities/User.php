@@ -7,10 +7,17 @@ return [
         'name' => 'username',
         'type' => 'varchar',
         'length' => 255,
-        'required' => true
+        'required' => true,
+        'unique' => true
     ],
     [
         'name' => 'password',
+        'type' => 'varchar',
+        'length' => 255,
+        'required' => true
+    ],
+    [
+        'name' => 'mail',
         'type' => 'varchar',
         'length' => 255,
         'required' => true

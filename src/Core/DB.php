@@ -20,7 +20,6 @@ class DB
         return $this->prepareResult($result)[0];
     }
 
-
     public function prepareResult($result): array
     {
         $output = [];
