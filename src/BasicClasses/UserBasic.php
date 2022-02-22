@@ -3,6 +3,7 @@
 namespace PS\Source\BasicClasses;
 
 use Exception;
+use PS\Source\Classes\User;
 use PS\Source\Core\DB;
 
 class UserBasic extends DB
@@ -38,6 +39,10 @@ class UserBasic extends DB
             $this->{$column['name']} = null;
         }
     }
+    
+	public static function getInstance() {
+		return new User();
+	}
 
     public function getUsername()
 	{

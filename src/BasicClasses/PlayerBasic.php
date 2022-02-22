@@ -3,6 +3,7 @@
 namespace PS\Source\BasicClasses;
 
 use Exception;
+use PS\Source\Classes\Player;
 use PS\Source\Core\DB;
 
 class PlayerBasic extends DB
@@ -29,6 +30,10 @@ class PlayerBasic extends DB
             $this->{$column['name']} = null;
         }
     }
+    
+	public static function getInstance() {
+		return new Player();
+	}
 
     public function getUserID()
 	{

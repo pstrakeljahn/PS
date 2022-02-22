@@ -3,6 +3,7 @@
 namespace PS\Source\BasicClasses;
 
 use Exception;
+use PS\Source\Classes\Team;
 use PS\Source\Core\DB;
 
 class TeamBasic extends DB
@@ -29,6 +30,10 @@ class TeamBasic extends DB
             $this->{$column['name']} = null;
         }
     }
+    
+	public static function getInstance() {
+		return new Team();
+	}
 
     public function getName()
 	{

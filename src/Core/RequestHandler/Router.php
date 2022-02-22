@@ -88,8 +88,7 @@ class Router extends Request
     {
         $error = ['code' => null, 'message' => null];
         if (isset($this->input['username']) && isset($this->input['password'])) {
-            $user = new User();
-            $user = $user->add(User::USERNAME, $this->input['username'])->go();
+            $user = User::getInstance()->add(User::USERNAME, $this->input['username'])->go();
             $error['code'] = self::STATUS_CODE_BAD_REQUEST;
             $error['message'] = 'Login failed';
             $obj = ['login', array()];
