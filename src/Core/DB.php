@@ -130,6 +130,7 @@ class DB
         if (!is_null($this->getID())) {
             $query = 'UPDATE ' . strtolower(self::getClassName()) . 's SET';
             $valueString = '';
+            $condition = '';
             foreach ($this as $key => $value) {
                 if ($key === 'ID') {
                     $condition = ' WHERE ID = ' . $value . ';';
