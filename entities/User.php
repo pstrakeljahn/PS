@@ -14,7 +14,8 @@ return [
         'name' => 'password',
         'type' => 'varchar',
         'length' => 255,
-        'required' => true
+        'required' => true,
+        'apiReadable' => false
     ],
     [
         'name' => 'mail',

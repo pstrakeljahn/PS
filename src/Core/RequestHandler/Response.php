@@ -25,6 +25,7 @@ class Response
 
     public static function generateResponse($obj, $error, $statusCode = null)
     {
+        $obj = self::checkApiReadable($obj);
         header_remove();
         header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
         header('Content-Type: application/json');
@@ -38,5 +39,18 @@ class Response
             : null;
 
         echo json_encode($response);
+    }
+
+    public static function checkApiReadable($obj)
+    {
+        $arrPath = explode("\\", get_class($obj));
+        $entityPath = __DIR__.'/../../../entities/' . $arrPath[count($arrPath) - 1] . '.php';
+        $entity = include($entityPath);
+        foreach ($entity as $column) {
+            if(isset($column['apiReadable']) && !$column['apiReadable']) {
+                unset($obj->{$column['name']});
+            }
+        }
+        return $obj;
     }
 }

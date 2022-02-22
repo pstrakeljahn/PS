@@ -8,6 +8,7 @@ How to use the entity-Builder:
         'values' => if enum: array of values
         'notnull' => not null (bool)
         'range' => x,y (decimal)
+        'apiReadable' => if false no access to attributes via api is possible
 
         // necessary for FKs
         'reference' => 'User',
