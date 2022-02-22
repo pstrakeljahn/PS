@@ -20,7 +20,7 @@ class Logging
         }
     }
 
-    public function generateFiles(): void
+    public static function generateFiles(): void
     {
         if (!file_exists(self::LOG_PATH)) {
             mkdir(self::LOG_PATH, 0777, true);

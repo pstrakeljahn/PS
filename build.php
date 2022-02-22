@@ -2,11 +2,13 @@
 
 use PS\Source\Classes\User;
 use PS\Source\Core\Builder\ClassBuilder;
+use PS\Source\Core\Logging\Logging;
 
 require_once __DIR__ . '/autoload.php';
 
 $builderInstance = new ClassBuilder();
 $builderInstance->buildClass();
+Logging::generateFiles();
 
 // Insert admin
 $user = User::getInstance();
