@@ -9,6 +9,7 @@ How to use the entity-Builder:
         'notnull' => not null (bool)
         'range' => x,y (decimal)
         'apiReadable' => if false no access to attributes via api is possible
+        'unique' => is unique
 
         // necessary for FKs
         'reference' => 'User',
