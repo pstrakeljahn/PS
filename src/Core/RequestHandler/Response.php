@@ -28,9 +28,13 @@ class Response
 	const STATUS_CODE_NOTFOUND = 404;
 	const STATUS_SERVER_ERROR = 500;
 
-	public static function generateResponse($obj, $error, $statusCode = null)
+	public static function generateResponse($obj, $error, $methode = null, $statusCode = null)
 	{
-		$obj = self::checkApiReadable($obj);
+        if($methode === 'post' || 'patch') {
+
+        } elseif($methode === 'get') {
+            $obj = self::checkApiReadable($obj);
+        }
 		header_remove();
 		header("Cache-Control: no-transform,public,max-age=300,s-maxage=900");
 		header('Content-Type: application/json');

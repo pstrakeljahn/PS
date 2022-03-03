@@ -54,7 +54,7 @@ class Router extends Request
         } else if (empty($arrUrl[1]) && $this->method === 'POST') {
             if (!count($_POST) && empty($input)) {
                 $error = ['code' => Response::STATUS_CODE_BAD_REQUEST, 'message' => 'Request body is empty'];
-                $this->generateResponse(null, $error);
+                $this->generateResponse(null, $error, __FUNCTION__);
                 return;
             }
             call_user_func_array([$this, $this->method], [new $className(), $_GET, $_POST, $this->input, $error]);

@@ -8,7 +8,7 @@ class Request extends Response
 {
     public function get($obj, $get, $post, $input, $error = null, $id = null)
     {
-        $this->generateResponse($obj, $error);
+        $this->generateResponse($obj, $error, __FUNCTION__);
     }
 
     protected function post($obj, $get, $post, $input, $error = null, $id = null)
@@ -17,6 +17,7 @@ class Request extends Response
         if (!empty($input)) {
                 $requestData = is_array($input) ? $input : json_decode($input, true);
         }
+        //@todo BUG!!!
         if (!is_null($obj) && $obj[0] !== "login") {
             try {
                 $obj = RequestHelper::insertDataIntoObject($obj, $requestData ?? array(), true);
@@ -24,7 +25,7 @@ class Request extends Response
                 $error = json_decode($e->getMessage(), true);
             }
         }
-        $this->generateResponse($obj[0] === "login" ? $obj[1] : $obj, $error);
+        $this->generateResponse($obj[0] === "login" ? $obj[1] : $obj, $error, __FUNCTION__);
     }
 
     protected function patch($obj, $get, $post, $input, $error = null, $id = null)
@@ -40,7 +41,7 @@ class Request extends Response
                 $error = json_decode($e->getMessage(), true);
             }
         }
-        $this->generateResponse($obj, $error);
+        $this->generateResponse($obj, $error, __FUNCTION__);
     }
 
     protected function delete($obj, $get, $post, $input, $error = null, $id = null)
@@ -48,6 +49,6 @@ class Request extends Response
         if (!is_null($obj)) {
             $obj->delete();
         }
-        $this->generateResponse(null, $error);
+        $this->generateResponse(null, $error, __FUNCTION__);
     }
 }
