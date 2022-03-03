@@ -3,7 +3,7 @@
 namespace PS\Source\Core\Builder;
 
 use Exception;
-use PS\Source\Core\DBConnector;
+use PS\Source\Core\Database\DBConnector;
 use PS\Source\Core\Logging\Logging;
 
 class ClassBuilder extends DBConnector

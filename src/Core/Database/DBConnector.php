@@ -1,6 +1,6 @@
 <?php
 
-namespace PS\Source\Core;
+namespace PS\Source\Core\Database;
 
 use PDO;
 use PDOException;

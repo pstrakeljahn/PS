@@ -68,7 +68,7 @@ class Logging
 				fwrite($fh, '');
 			}
 		}
-		chmod(self::LOG_PATH, 0755);
+		// chmod(self::LOG_PATH, 0755);
     }
 
 	/**

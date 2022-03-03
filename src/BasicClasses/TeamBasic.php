@@ -4,9 +4,9 @@ namespace PS\Source\BasicClasses;
 
 use Exception;
 use PS\Source\Classes\Team;
-use PS\Source\Core\DB;
+use PS\Source\Core\Database\DatabaseHelper;
 
-class TeamBasic extends DB
+class TeamBasic extends DatabaseHelper
 {
     const ID = 'ID';
     const NAME = 'name';

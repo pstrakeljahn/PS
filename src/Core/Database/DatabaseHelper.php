@@ -1,10 +1,10 @@
 <?php
 
-namespace PS\Source\Core;
+namespace PS\Source\Core\Database;
 
 use Exception;
 
-class DB
+class DatabaseHelper
 {
 
     public function getByPK(int $id)

@@ -1,10 +1,9 @@
-[2022-03-03 21:21:44] : Table players created
-[2022-03-03 21:21:44] : BasicClass Player created
-[2022-03-03 21:21:44] : Table teams created
-[2022-03-03 21:21:44] : \PS\Source\Classes\Team::getCash() is not callable
-[2022-03-03 21:21:44] : \PS\Source\Classes\Team::setCash() is not callable
-[2022-03-03 21:21:44] : BasicClass Team created
-[2022-03-03 21:21:45] : Table users created
-[2022-03-03 21:21:45] : BasicClass User created
-[2022-03-03 21:21:45] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
-[2022-03-03 21:22:23] : User ID: 1, Object: PS\Source\Classes\User ID: 1, Code: 200
+[2022-03-03 21:40:59] : Table players created
+[2022-03-03 21:40:59] : BasicClass Player created
+[2022-03-03 21:40:59] : Table teams created
+[2022-03-03 21:40:59] : \PS\Source\Classes\Team::getCash() is not callable
+[2022-03-03 21:40:59] : \PS\Source\Classes\Team::setCash() is not callable
+[2022-03-03 21:40:59] : BasicClass Team created
+[2022-03-03 21:40:59] : Table users created
+[2022-03-03 21:40:59] : BasicClass User created
+[2022-03-03 21:40:59] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'

@@ -11,7 +11,7 @@ class BuildClassFile
     {
         $this->className = $className;
         $this->fileName = './src/BasicClasses/' . $className . 'Basic.php';
-        $this->templatePath = './src/Core/templates/';
+        $this->templatePath = './src/Core/Builder/templates/';
         $this->fileContent = file_get_contents($this->templatePath . 'basicClassTemplate.txt');
         $this->fileContentGetterSetter = file_get_contents($this->templatePath . 'getterSetterTemplate.txt');
     }

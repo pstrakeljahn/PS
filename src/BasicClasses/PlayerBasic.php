@@ -4,9 +4,9 @@ namespace PS\Source\BasicClasses;
 
 use Exception;
 use PS\Source\Classes\Player;
-use PS\Source\Core\DB;
+use PS\Source\Core\Database\DatabaseHelper;
 
-class PlayerBasic extends DB
+class PlayerBasic extends DatabaseHelper
 {
     const ID = 'ID';
     const USERID = 'UserID';
