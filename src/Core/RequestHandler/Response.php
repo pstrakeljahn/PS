@@ -17,7 +17,8 @@ class Response
 		304 => 'NOT MODIFIED',
 		400 => 'BAD REQUEST',
 		403 => 'FORBIDDEN',
-		404 => 'NOT FOUND'
+		404 => 'NOT FOUND',
+        500 => 'SERVER ERROR'
 	];
 
 	const STATUS_CODE_OK = 200;
