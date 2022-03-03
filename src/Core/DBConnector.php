@@ -4,6 +4,7 @@ namespace PS\Source\Core;
 
 use PDO;
 use PDOException;
+use PS\Source\Core\Logging\Logging;
 use PS\Source\Settings\Config;
 
 class DBConnector
@@ -26,7 +27,8 @@ class DBConnector
 		try {
 			$this->dbh = new PDO($dsn, $this->db_user, $this->db_pass, $db_options);
 		} catch (PDOException $e) {
-			echo $this->error = $e->getMessage();
+			Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+			$this->error = $e->getMessage();
 		}
 	}
 

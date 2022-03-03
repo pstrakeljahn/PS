@@ -48,7 +48,7 @@ class Response
 			$response = self::BODY;
 			$response['status'] = self::STATUS_SERVER_ERROR;
 		} else {
-			Logging::getInstance()->add(Logging::LOG_TYPE_API, 'User ID: ' . $user->getID() . ', Object: ' . get_class($obj) . ' ID: ' . $obj->getID() . ', Code: ' . $response['code']);
+			Logging::getInstance()->add(Logging::LOG_TYPE_API, 'User ID: ' . $user->getID() . ', Object: ' . get_class($obj) . ' ID: ' . $obj->getID() . ', Code: ' . $response['status']);
 		}
 		echo json_encode($response);
 	}

@@ -39,7 +39,7 @@ class SessionHandler extends Request
 		}
 		$user = User::getInstance()->add(User::ID, $userID)->select();
 		if(count($user)) {
-			return $user;
+			return $user[0];
 		}
 		return null;
 	}

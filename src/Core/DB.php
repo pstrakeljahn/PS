@@ -75,7 +75,7 @@ class DB
         return $this;
     }
 
-    public function go(): array
+    public function select(): array
     {
         $query = 'SELECT * FROM ' . strtolower(self::getClassName()) . 's ';
         if (isset($this->searchString)) {
