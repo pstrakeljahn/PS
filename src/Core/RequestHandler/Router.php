@@ -48,7 +48,7 @@ class Router extends Request
         } else if (empty($arrUrl[1]) && $this->method === 'GET') {
             // GET all without ID
             $instance = new $className();
-            $res = $instance->go();
+            $res = $instance->select();
             call_user_func_array([$this, $this->method], [$res, $_GET, $_POST, $this->input, $error]);
             return;
         } else if (empty($arrUrl[1]) && $this->method === 'POST') {
@@ -88,7 +88,7 @@ class Router extends Request
     {
         $error = ['code' => null, 'message' => null];
         if (isset($this->input['username']) && isset($this->input['password'])) {
-            $user = User::getInstance()->add(User::USERNAME, $this->input['username'])->go();
+            $user = User::getInstance()->add(User::USERNAME, $this->input['username'])->select();
             $error['code'] = self::STATUS_CODE_BAD_REQUEST;
             $error['message'] = 'Login failed';
             $obj = ['login', array()];

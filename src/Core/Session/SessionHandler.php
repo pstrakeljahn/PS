@@ -2,26 +2,47 @@
 
 namespace PS\Source\Core\Session;
 
+use PS\Source\Classes\User;
 use PS\Source\Core\RequestHandler\Request;
 
 class SessionHandler extends Request
 {
     public static function loggedIn(): bool
     {
+        if(!is_null(self::getUserID())) {
+			return true;
+		}
+        return false;
+    }
+
+	private static function getUserID(): ?int
+	{
         $token = self::getBearerToken();
         if (is_null($token)) {
-            return false;
+            return null;
         }
         $payload = TokenHelper::decodeToken($token);
         if (is_null($payload)) {
-            return false;
+            return null;
         }
         $userID = $payload['userID'];
         if (is_numeric($userID)) {
-            return true;
+            return (int)$userID;
         }
-        return false;
-    }
+	}
+
+	public static function whoami(): ?User
+	{
+		$userID = self::getUserID();
+		if(is_null($userID)) {
+			return null;
+		}
+		$user = User::getInstance()->add(User::ID, $userID)->select();
+		if(count($user)) {
+			return $user;
+		}
+		return null;
+	}
 
     private static function getAuthorizationHeader(): ?string
     {

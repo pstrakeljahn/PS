@@ -1,0 +1,2 @@
+[2022-03-03 19:12:25] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+[2022-03-03 19:12:39] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'

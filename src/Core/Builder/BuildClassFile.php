@@ -2,6 +2,8 @@
 
 namespace PS\Source\Core\Builder;
 
+use PS\Source\Core\Logging\Logging;
+
 class BuildClassFile
 {
 
@@ -76,10 +78,10 @@ class BuildClassFile
                 if (isset($column['virtual']) && $column['virtual']) {
                     $namespace = '\PS\Source\Classes\\' . $this->className;
                     if (!method_exists(new $namespace(), 'get' . ucfirst($column['name']))) {
-                        echo $namespace. '::get' . ucfirst($column['name']) . '() is not callable! <br>';
+						Logging::getInstance()->add(Logging::LOG_TYPE_DEBUG, $namespace. '::get' . ucfirst($column['name']) . '() is not callable');
                     }
                     if (!method_exists(new $namespace(), 'set' . ucfirst($column['name']))) {
-                        echo $namespace. '::set' . ucfirst($column['name']) . '() is not callable! <br>';
+						Logging::getInstance()->add(Logging::LOG_TYPE_DEBUG, $namespace. '::set' . ucfirst($column['name']) . '() is not callable');
                     }
                 }
             }

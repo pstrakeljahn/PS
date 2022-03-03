@@ -4,6 +4,7 @@ namespace PS\Source\Core\Builder;
 
 use Exception;
 use PS\Source\Core\DBConnector;
+use PS\Source\Core\Logging\Logging;
 
 class ClassBuilder extends DBConnector
 {
@@ -25,22 +26,42 @@ class ClassBuilder extends DBConnector
             $className = ucfirst(substr($arrPath[count($arrPath) - 1], 0, -4));
 
             // Check Validity
-            if (!$this->checkEntityValidity(include $entity)) {
-                throw new Exception('Invalid Entity ' . $className);
-            };
+			try{
+				if (!$this->checkEntityValidity(include $entity)) {
+					throw new Exception('Invalid Entity ' . $className);
+				}
+			} catch(\Exception $e) {
+				Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+				Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, 'Validity check failed');
+				return;
+			}
 
             // @todo ALTERLOGIK FEHLT HIER NOCH!
-            if (!$this->generateTables($className, include $entity)) {
-                $e = new \Exception('Cannot create Table ' . $className . 's!');
-                throw $e;
-            }
-            echo 'Table ' . strtolower($className) . 's created.<br>';
-            if (!$this->generateBasicClass($className)) {
-                throw new \Exception('Cannot create BasicClass ' . $className);
-            }
-            echo 'BasicClass ' . $className . ' created.<br><br>';
+			try{
+				if (!$this->generateTables($className, include $entity)) {
+					$e = new \Exception('Cannot create Table ' . $className . 's!');
+					throw $e;
+				}
+
+			} catch(\Exception $e) {
+				Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+			}
+			Logging::getInstance()->add(Logging::LOG_TYPE_DEBUG, 'Table ' . strtolower($className) . 's created');
+
+			try{
+				if (!$this->generateBasicClass($className)) {
+					throw new \Exception('Cannot create BasicClass ' . $className);
+				}
+			} catch(\Exception $e) {
+				Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+			}
+			Logging::getInstance()->add(Logging::LOG_TYPE_DEBUG, 'BasicClass ' . $className . ' created');
         }
-        $this->fetchKeyConstraints();
+		try{
+			$this->fetchKeyConstraints();
+		} catch(\Exception $e) {
+			Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+		}
     }
 
     private function fetchKeyConstraints()
@@ -127,7 +148,11 @@ class ClassBuilder extends DBConnector
 
     private function generateBasicClass(string $className): bool
     {
-        $initClass = new BuildClassFile($className);
-        return $initClass->execute();
+		try{
+			$initClass = new BuildClassFile($className);
+			return $initClass->execute();
+		} catch(\Exception $e) {
+			Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+		}
     }
 }

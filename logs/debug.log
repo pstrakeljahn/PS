@@ -1,0 +1,16 @@
+[2022-03-03 19:12:24] : Table players created
+[2022-03-03 19:12:24] : BasicClass Player created
+[2022-03-03 19:12:24] : Table teams created
+[2022-03-03 19:12:24] : \PS\Source\Classes\Team::getCash() is not callable
+[2022-03-03 19:12:24] : \PS\Source\Classes\Team::setCash() is not callable
+[2022-03-03 19:12:24] : BasicClass Team created
+[2022-03-03 19:12:24] : Table users created
+[2022-03-03 19:12:24] : BasicClass User created
+[2022-03-03 19:12:38] : Table players created
+[2022-03-03 19:12:38] : BasicClass Player created
+[2022-03-03 19:12:38] : Table teams created
+[2022-03-03 19:12:38] : \PS\Source\Classes\Team::getCash() is not callable
+[2022-03-03 19:12:38] : \PS\Source\Classes\Team::setCash() is not callable
+[2022-03-03 19:12:38] : BasicClass Team created
+[2022-03-03 19:12:38] : Table users created
+[2022-03-03 19:12:38] : BasicClass User created
