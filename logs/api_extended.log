@@ -10,3 +10,25 @@
 [2022-03-07 23:26:48] : User ID: 1, Object: PS\Source\Classes\User method: \"POST\", ID: null, Code: 500
 [2022-03-07 23:27:06] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: null, Code: 500
 [2022-03-07 23:27:24] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: 25, Code: 200
+<<<<<<< Updated upstream
+=======
+[2022-03-07 23:30:50] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:32:43] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
+[2022-03-07 23:32:48] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:32:54] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
+[2022-03-07 23:32:58] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:33:00] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
+[2022-03-07 23:33:07] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:33:30] : User ID: 1, Object:  method: "GET", ID: all, Code: 404
+[2022-03-07 23:35:34] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:36:44] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:36:56] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:37:54] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:40:56] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:41:11] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
+[2022-03-07 23:44:09] : User ID: 1, Object:  method: "GET", ID: all, Code: 404
+[2022-03-07 23:48:33] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
+[2022-03-07 23:48:51] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
+[2022-03-07 23:50:58] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
+[2022-03-07 23:52:22] : User ID: 1, Object: "" method: "GET", ID: -, Code: 404
+>>>>>>> Stashed changes

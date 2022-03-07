@@ -56,14 +56,17 @@ class Response
             Logging::getInstance()->add(
                 Logging::LOG_TYPE_API,
                 'User ID: '
-                    . $user->getID() . ', Object: '
-                    . (is_null($obj) ? null : (get_class(gettype($obj) !== "array" ? $obj : $obj[0])))
-                    . ' method: "'
+                    . $user->getID() . ', Object: "'
+                    . (is_null($obj) ? null : (get_class(gettype($obj) !== "array" ? $obj : $obj[0] ?? "-")))
+                    . '" method: "'
                     . strtoupper($methode)
                     . '", ID: '
-                    . (is_null($obj) ? null : ((gettype($obj) === "array") ? 'all' : $obj->getID() ?? 'null'))
+                    . (is_null($obj) ? null : ((gettype($obj) === "array") ? (count($obj) ? 'all' : "-") : $obj->getID() ?? 'null'))
                     . ', Code: ' . $response['status']
             );
+        }
+        if (isset($error['code']) && !is_null($error['code']) && isset($error['message']) && !is_null($error['message'])) {
+            Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $error['message']);
         }
         echo json_encode($response);
     }

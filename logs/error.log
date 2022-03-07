@@ -2,3 +2,12 @@
 [2022-03-07 23:19:19] : Cannot create BasicClass Team
 [2022-03-07 23:19:19] : Cannot create BasicClass User
 [2022-03-07 23:19:19] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+<<<<<<< Updated upstream
+=======
+[2022-03-07 23:44:09] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-07 23:45:36] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-07 23:48:33] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-07 23:48:51] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-07 23:50:58] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-07 23:52:22] : Object\PS\Source\Classes\Useree does not exist!
+>>>>>>> Stashed changes
