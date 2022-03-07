@@ -64,6 +64,8 @@ class Router extends Request
             $objInstance = new $className();
             $obj = $objInstance->getByPK((int)$arrUrl[1]);
             if (is_null($obj)) {
+                $obj = new $className();
+                $obj->ID = (int)$arrUrl[1];
                 $error = ['code' => Response::STATUS_CODE_NOTFOUND, 'message' => 'Object with ID ' . (int)$arrUrl[1] . ' was not found'];
             }
             // single object selected

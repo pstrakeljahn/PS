@@ -1,0 +1,12 @@
+[2022-03-07 23:19:30] : User ID: 1, Object: PS\Source\Classes\User ID: all, Code: 200
+[2022-03-07 23:19:41] : User ID: 1, Object: PS\Source\Classes\User ID: 1, Code: 200
+[2022-03-07 23:19:46] : User ID: 1, Object:  ID: , Code: 404
+[2022-03-07 23:21:55] : User ID: 1, Object: PS\Source\Classes\User ID: , Code: 404
+[2022-03-07 23:22:34] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 404
+[2022-03-07 23:23:56] : User ID: 1, Object: PS\Source\Classes\User ID: 133, Code: 404
+[2022-03-07 23:24:46] : User ID: 1, Object: PS\Source\Classes\User ID: 15, Code: 404
+[2022-03-07 23:24:58] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 500
+[2022-03-07 23:26:23] : User ID: 1, Object: PS\Source\Classes\User method: POST ID: null, Code: 500
+[2022-03-07 23:26:48] : User ID: 1, Object: PS\Source\Classes\User method: \"POST\", ID: null, Code: 500
+[2022-03-07 23:27:06] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: null, Code: 500
+[2022-03-07 23:27:24] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: 25, Code: 200

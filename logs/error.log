@@ -1,1 +1,4 @@
-[2022-03-03 21:40:59] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+[2022-03-07 23:19:19] : Cannot create BasicClass Player
+[2022-03-07 23:19:19] : Cannot create BasicClass Team
+[2022-03-07 23:19:19] : Cannot create BasicClass User
+[2022-03-07 23:19:19] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'

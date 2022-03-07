@@ -53,17 +53,28 @@ class Response
             $response = self::BODY;
             $response['status'] = self::STATUS_SERVER_ERROR;
         } else {
-            Logging::getInstance()->add(Logging::LOG_TYPE_API, 'User ID: ' . $user->getID()
-             . ', Object: ' . get_class(gettype($obj) !== "array" ? $obj : $obj[0]) . ' ID: ' 
-             . ((gettype($obj) === "array") ? 'all' : $obj->getID()) . ', Code: ' . $response['status']);
+            Logging::getInstance()->add(
+                Logging::LOG_TYPE_API,
+                'User ID: '
+                    . $user->getID() . ', Object: '
+                    . (is_null($obj) ? null : (get_class(gettype($obj) !== "array" ? $obj : $obj[0])))
+                    . ' method: "'
+                    . strtoupper($methode)
+                    . '", ID: '
+                    . (is_null($obj) ? null : ((gettype($obj) === "array") ? 'all' : $obj->getID() ?? 'null'))
+                    . ', Code: ' . $response['status']
+            );
         }
         echo json_encode($response);
     }
 
     public static function checkApiReadable($obj)
     {
-        if(gettype($obj) === "array") {
-            foreach($obj as &$object) {
+        if (is_null($obj)) {
+            return null;
+        }
+        if (gettype($obj) === "array") {
+            foreach ($obj as &$object) {
                 $object = self::doFiltering($object);
             }
         } else {
@@ -72,7 +83,8 @@ class Response
         return $obj;
     }
 
-    private static function doFiltering($obj) {
+    private static function doFiltering($obj)
+    {
         $arrPath = explode("\\", get_class($obj));
         $entityPath = __DIR__ . '/../../../entities/' . $arrPath[count($arrPath) - 1] . '.php';
         $entity = include($entityPath);

@@ -1,9 +1,22 @@
-[2022-03-03 21:40:59] : Table players created
-[2022-03-03 21:40:59] : BasicClass Player created
-[2022-03-03 21:40:59] : Table teams created
-[2022-03-03 21:40:59] : \PS\Source\Classes\Team::getCash() is not callable
-[2022-03-03 21:40:59] : \PS\Source\Classes\Team::setCash() is not callable
-[2022-03-03 21:40:59] : BasicClass Team created
-[2022-03-03 21:40:59] : Table users created
-[2022-03-03 21:40:59] : BasicClass User created
-[2022-03-03 21:40:59] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+[2022-03-07 23:19:19] : Table players created
+[2022-03-07 23:19:19] : Cannot create BasicClass Player
+[2022-03-07 23:19:19] : BasicClass Player created
+[2022-03-07 23:19:19] : Table teams created
+[2022-03-07 23:19:19] : Cannot create BasicClass Team
+[2022-03-07 23:19:19] : BasicClass Team created
+[2022-03-07 23:19:19] : Table users created
+[2022-03-07 23:19:19] : Cannot create BasicClass User
+[2022-03-07 23:19:19] : BasicClass User created
+[2022-03-07 23:19:19] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+[2022-03-07 23:19:30] : User ID: 1, Object: PS\Source\Classes\User ID: all, Code: 200
+[2022-03-07 23:19:41] : User ID: 1, Object: PS\Source\Classes\User ID: 1, Code: 200
+[2022-03-07 23:19:46] : User ID: 1, Object:  ID: , Code: 404
+[2022-03-07 23:21:55] : User ID: 1, Object: PS\Source\Classes\User ID: , Code: 404
+[2022-03-07 23:22:34] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 404
+[2022-03-07 23:23:56] : User ID: 1, Object: PS\Source\Classes\User ID: 133, Code: 404
+[2022-03-07 23:24:46] : User ID: 1, Object: PS\Source\Classes\User ID: 15, Code: 404
+[2022-03-07 23:24:58] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 500
+[2022-03-07 23:26:23] : User ID: 1, Object: PS\Source\Classes\User method: POST ID: null, Code: 500
+[2022-03-07 23:26:48] : User ID: 1, Object: PS\Source\Classes\User method: \"POST\", ID: null, Code: 500
+[2022-03-07 23:27:06] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: null, Code: 500
+[2022-03-07 23:27:24] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: 25, Code: 200
