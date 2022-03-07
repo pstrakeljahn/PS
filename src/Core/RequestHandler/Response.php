@@ -42,7 +42,7 @@ class Response
         header('Status: ' . ($statusCode ?? (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK)));
         $response = self::BODY;
         $response['status'] = $statusCode ?? (isset($error['code']) ? $error['code'] : self::STATUS_CODE_OK);
-        $response['data'] = ($response['status'] !== Response::STATUS_SERVER_ERROR) ? $obj : null;
+        $response['data'] = ($response['status'] === Response::STATUS_SERVER_ERROR || $response['status'] === Response::STATUS_CODE_NOTFOUND) ? null : $obj;
         $response['error'] = (isset($error['code']) && !is_null($error['code'])) ?
             (isset($error['message']) && is_null($error['message']) ? self::FALLBACK_ERROR_MESSAGES[$error['code']] : $error['message'])
             : null;

@@ -1,50 +1,16 @@
-[2022-03-07 23:19:19] : Table players created
-[2022-03-07 23:19:19] : Cannot create BasicClass Player
-[2022-03-07 23:19:19] : BasicClass Player created
-[2022-03-07 23:19:19] : Table teams created
-[2022-03-07 23:19:19] : Cannot create BasicClass Team
-[2022-03-07 23:19:19] : BasicClass Team created
-[2022-03-07 23:19:19] : Table users created
-[2022-03-07 23:19:19] : Cannot create BasicClass User
-[2022-03-07 23:19:19] : BasicClass User created
-[2022-03-07 23:19:19] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
-[2022-03-07 23:19:30] : User ID: 1, Object: PS\Source\Classes\User ID: all, Code: 200
-[2022-03-07 23:19:41] : User ID: 1, Object: PS\Source\Classes\User ID: 1, Code: 200
-[2022-03-07 23:19:46] : User ID: 1, Object:  ID: , Code: 404
-[2022-03-07 23:21:55] : User ID: 1, Object: PS\Source\Classes\User ID: , Code: 404
-[2022-03-07 23:22:34] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 404
-[2022-03-07 23:23:56] : User ID: 1, Object: PS\Source\Classes\User ID: 133, Code: 404
-[2022-03-07 23:24:46] : User ID: 1, Object: PS\Source\Classes\User ID: 15, Code: 404
-[2022-03-07 23:24:58] : User ID: 1, Object: PS\Source\Classes\User ID: null, Code: 500
-[2022-03-07 23:26:23] : User ID: 1, Object: PS\Source\Classes\User method: POST ID: null, Code: 500
-[2022-03-07 23:26:48] : User ID: 1, Object: PS\Source\Classes\User method: \"POST\", ID: null, Code: 500
-[2022-03-07 23:27:06] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: null, Code: 500
-[2022-03-07 23:27:24] : User ID: 1, Object: PS\Source\Classes\User method: "POST", ID: 25, Code: 200
-<<<<<<< Updated upstream
-=======
-[2022-03-07 23:30:50] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:32:43] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
-[2022-03-07 23:32:48] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:32:54] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
-[2022-03-07 23:32:58] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:33:00] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 500
-[2022-03-07 23:33:07] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:33:30] : User ID: 1, Object:  method: "GET", ID: all, Code: 404
-[2022-03-07 23:35:34] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:36:44] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:36:56] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:37:54] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:40:56] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:41:11] : User ID: 1, Object: PS\Source\Classes\User method: "GET", ID: all, Code: 200
-[2022-03-07 23:44:09] : Object\PS\Source\Classes\Useree does not exist!
-[2022-03-07 23:44:09] : User ID: 1, Object:  method: "GET", ID: all, Code: 404
-[2022-03-07 23:45:36] : Object\PS\Source\Classes\Useree does not exist!
-[2022-03-07 23:48:33] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
-[2022-03-07 23:48:33] : Object\PS\Source\Classes\Useree does not exist!
-[2022-03-07 23:48:51] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
-[2022-03-07 23:48:51] : Object\PS\Source\Classes\Useree does not exist!
-[2022-03-07 23:50:58] : User ID: 1, Object: "" method: "GET", ID: all, Code: 404
-[2022-03-07 23:50:58] : Object\PS\Source\Classes\Useree does not exist!
-[2022-03-07 23:52:22] : User ID: 1, Object: "" method: "GET", ID: -, Code: 404
-[2022-03-07 23:52:22] : Object\PS\Source\Classes\Useree does not exist!
->>>>>>> Stashed changes
+[2022-03-08 00:01:12] : Table players created
+[2022-03-08 00:01:12] : Cannot create BasicClass Player
+[2022-03-08 00:01:12] : BasicClass Player created
+[2022-03-08 00:01:12] : Table teams created
+[2022-03-08 00:01:12] : Cannot create BasicClass Team
+[2022-03-08 00:01:12] : BasicClass Team created
+[2022-03-08 00:01:12] : Table users created
+[2022-03-08 00:01:12] : Cannot create BasicClass User
+[2022-03-08 00:01:12] : BasicClass User created
+[2022-03-08 00:01:12] : SQLSTATE[HY000]: General error: 1826 Duplicate foreign key constraint name 'FK_UserPlayer1'
+[2022-03-08 00:01:15] : User ID: 1, Object: "" method: "GET", ID: -, Code: 404
+[2022-03-08 00:01:15] : Object\PS\Source\Classes\Useree does not exist!
+[2022-03-08 00:01:50] : User ID: 1, Object: "PS\Source\Classes\User" method: "GET", ID: 77, Code: 404
+[2022-03-08 00:01:50] : Object with ID 77 was not found
+[2022-03-08 00:03:04] : User ID: 1, Object: "PS\Source\Classes\User" method: "GET", ID: 77, Code: 404
+[2022-03-08 00:03:04] : Object with ID 77 was not found
