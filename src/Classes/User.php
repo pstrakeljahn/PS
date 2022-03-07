@@ -10,5 +10,7 @@ use PS\Source\BasicClasses\UserBasic;
 
 class User extends UserBasic
 {
-    
+    public function savePre() {
+        $this->setPassword(password_hash($this->getPassword(), PASSWORD_DEFAULT));
+    }
 }

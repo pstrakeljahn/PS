@@ -97,6 +97,9 @@ class DatabaseHelper
 
     public function save()
     {
+        if(method_exists($this, 'savePre')) {
+            call_user_func_array([$this, 'savePre'], []);
+        };
         if (isset($this->searchString)) {
             unset($this->searchString);
         }

@@ -17,15 +17,19 @@ class Request extends Response
         if (!empty($input)) {
                 $requestData = is_array($input) ? $input : json_decode($input, true);
         }
-        //@todo BUG!!!
-        if (!is_null($obj) && $obj[0] !== "login") {
+        
+        $loginRequest = false;
+        if(gettype($obj) === "array" && $obj[0] !== "login") {
+            $loginRequest = true;
+        }
+        if (!is_null($obj)) {
             try {
                 $obj = RequestHelper::insertDataIntoObject($obj, $requestData ?? array(), true);
             } catch (\Exception $e) {
-                $error = json_decode($e->getMessage(), true);
+                $error = ['code' => Response::STATUS_SERVER_ERROR, 'message' => $e->getMessage()];
             }
         }
-        $this->generateResponse($obj[0] === "login" ? $obj[1] : $obj, $error, __FUNCTION__);
+        $this->generateResponse($loginRequest ? $obj[1] : $obj, $error, __FUNCTION__);
     }
 
     protected function patch($obj, $get, $post, $input, $error = null, $id = null)
@@ -38,7 +42,7 @@ class Request extends Response
             try {
                 $obj = RequestHelper::insertDataIntoObject($obj, $requestData);
             } catch (\Exception $e) {
-                $error = json_decode($e->getMessage(), true);
+                $error = ['code' => Response::STATUS_SERVER_ERROR, 'message' => $e->getMessage()];
             }
         }
         $this->generateResponse($obj, $error, __FUNCTION__);
