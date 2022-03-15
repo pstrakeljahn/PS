@@ -27,7 +27,7 @@ class FetchNwvvHelper
                 continue;
             }
             $result = $instanceResult->add('kickoff', $kickoff)->add('home', $homeTeam)->add('away', $awayTeam)->select();
-            if (!count($result)) {
+            if (!count($result) && !is_null($link)) {
                 self::createNewEntry($homeTeam, $awayTeam, $kickoff, $pointsHome, $pointsAway, $league, $sets, $link, $key);
             }
         }
