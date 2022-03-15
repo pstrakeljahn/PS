@@ -12,12 +12,8 @@ $instanceVolleyball = new VolleyballResult();
 
 $results = [];
 
-$resultsFuba = $instanceFuba->getLatestResult();
-$resultsTT = $instanceTT->getLatestResult();
-$resultVolleyBall = $instanceVolleyball->getLatestResult();
-
-$results['football'] = $resultsFuba;
-$results['tabletennis'] = $resultsTT;
-$results['volleyball'] = $resultVolleyBall;
+$results['football'] = $instanceFuba->getLatestResult();
+$results['tabletennis'] = $instanceTT->getLatestResult();
+$results['volleyball'] = $instanceVolleyball->getLatestResult();
 
 echo json_encode($results);
