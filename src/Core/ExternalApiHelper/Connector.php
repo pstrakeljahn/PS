@@ -94,11 +94,6 @@ class Connector
         curl_setopt($this->curlInstance, CURLOPT_COOKIEFILE, $cookiePath);
         return $this;
     }
-    
-
-    
-
-
 
     /**
 	* Returns the responde of the request
