@@ -17,7 +17,10 @@ class VolleyballResult extends VolleyballResultBasic
         if (!count($teamIDs)) {
             foreach (array_values(Config::ARR_SEASONKEYS) as $tID) {
                 $selfInstance = new self;
-                $result = $selfInstance->add('teamID', $tID)->orderBy('kickoff', 'DESC')->limit(1)->select();
+                $result = $selfInstance->add(VolleyballResult::TEAMID, $tID)
+                                    ->orderBy(VolleyballResult::KICKOFF, 'DESC')
+                                    ->limit(1)
+                                    ->select();
                 if (count($result)) {
                     $output[] = $result[0];
                 }
@@ -26,7 +29,10 @@ class VolleyballResult extends VolleyballResultBasic
         if (count($teamIDs)) {
             foreach ($teamIDs as $teamID) {
                 $selfInstance = new self;
-                $result = $selfInstance->add('teamID', $teamID)->orderBy('kickoff', 'DESC')->limit(1)->select();
+                $result = $selfInstance->add(VolleyballResult::TEAMID, $teamID)
+                                    ->orderBy(VolleyballResult::KICKOFF, 'DESC')
+                                    ->limit(1)
+                                    ->select();
                 $output[] = count($result) ? $result[0] : [];
             }
         }

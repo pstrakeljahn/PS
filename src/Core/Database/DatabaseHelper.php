@@ -8,6 +8,8 @@ use PS\Source\Core\Logging\Logging;
 
 class DatabaseHelper
 {
+    const IS_NOT_NULL = 'isNotNull';
+    const IS_NULL = 'isNull';
 
     public function getByPK(int $id)
     {

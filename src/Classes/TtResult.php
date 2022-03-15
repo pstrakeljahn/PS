@@ -17,7 +17,10 @@ class TtResult extends TtResultBasic
         if (!count($teamIDs)) {
             foreach (Config::ARR_TEAMS_TT as $tID) {
                 $selfInstance = new self;
-                $result = $selfInstance->add('teamID', $tID)->orderBy('kickoff', 'DESC')->limit(1)->select();
+                $result = $selfInstance->add(TtResult::TEAMID, $tID)
+                                    ->orderBy(TtResult::KICKOFF, 'DESC')
+                                    ->limit(1)
+                                    ->select();
                 if (count($result)) {
                     $output[] = $result[0];
                 }
@@ -26,7 +29,10 @@ class TtResult extends TtResultBasic
         if (count($teamIDs)) {
             foreach ($teamIDs as $teamID) {
                 $selfInstance = new self;
-                $result = $selfInstance->add('teamID', $teamID)->orderBy('kickoff', 'DESC')->limit(1)->select();
+                $result = $selfInstance->add(TtResult::TEAMID, $teamID)
+                                    ->orderBy(TtResult::KICKOFF, 'DESC')
+                                    ->limit(1)
+                                    ->select();
                 $output[] = count($result) ? $result[0] : [];
             }
         }
