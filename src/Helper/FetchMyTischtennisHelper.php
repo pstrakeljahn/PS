@@ -67,7 +67,7 @@ class FetchMyTischtennisHelper
     private static function getHeaderToken(): void
     {
         // If cookie is not older than 5 minutes do nothing
-        if (time() - filemtime(self::getCookiePath()) < 3000) {
+        if (time() - filemtime(self::getCookiePath()) < 300) {
             return;
         }
         unlink(self::getCookiePath());
