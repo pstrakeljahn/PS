@@ -70,7 +70,7 @@ class FetchFupaDataHelper
     private static function getExternalData($team, $season): array
     {
         $objApiConnector = new Connector();
-        $response = $objApiConnector->setUrl('https://api.fupa.net/v1/teams/tsv-venne-m' . $team . '-' . $season . '/matches')->getResponse();
+        $response = $objApiConnector->setUrl('https://api.fupa.net/v1/teams/tsv-venne-m' . $team . '-' . $season . '/matches?sort=desc&limit=60')->getResponse();
         return json_decode($response, true);
     }
 
