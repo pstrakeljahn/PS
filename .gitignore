@@ -1,4 +1,4 @@
 .vscode
 xdebug.txt
 test.php
-logs
+/logs

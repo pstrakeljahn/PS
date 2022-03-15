@@ -65,6 +65,22 @@ class Connector
     }
 
     /**
+	* Save Cookie to *.txt
+	* 
+	* @param string $cookiePath Path to a *.txt file  
+	* @return self
+	*/
+    public function setSaveCookie(string $cookiePath): self
+    {
+        if(file_exists($cookiePath)) {
+            throw new Exception('There is a CookieFile (' . $cookiePath . ')');
+        }
+        curl_setopt($this->curlInstance, CURLOPT_HEADER, 1);
+        curl_setopt($this->curlInstance, CURLOPT_COOKIEJAR, $cookiePath);
+        return $this;
+    }
+
+    /**
 	* Add Cookie
 	* 
 	* @param string $cookiePath Path to a *.txt file  
@@ -75,9 +91,14 @@ class Connector
         if(file_get_contents($cookiePath) === false) {
             throw new Exception('Cookie file not found');
         }
-        curl_setopt($this->curlInstance, CURLOPT_COOKIEJAR, $cookiePath);
+        curl_setopt($this->curlInstance, CURLOPT_COOKIEFILE, $cookiePath);
         return $this;
     }
+    
+
+    
+
+
 
     /**
 	* Returns the responde of the request

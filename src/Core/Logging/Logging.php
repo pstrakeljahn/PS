@@ -9,9 +9,10 @@ class Logging
 	const LOG_TYPE_API = 'api';
 	const LOG_TYPE_DEBUG = 'debug';
 	const LOG_TYPE_ERROR = 'error';
+	const LOG_TYPE_EXTERNAL = 'external';
 
 	const ARRAY_LOG_TYPES = [
-		self::LOG_TYPE_MAIN, self::LOG_TYPE_API, self::LOG_TYPE_API, self:: LOG_TYPE_DEBUG
+		self::LOG_TYPE_MAIN, self::LOG_TYPE_API, self::LOG_TYPE_API, self:: LOG_TYPE_DEBUG, self::LOG_TYPE_EXTERNAL
 	];
 
     const LOG_PATH = __DIR__ . '/../../..' . '/logs/';

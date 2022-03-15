@@ -3,6 +3,8 @@
 namespace PS\Source\Core\Database;
 
 use Exception;
+use Locale;
+use PS\Source\Core\Logging\Logging;
 
 class DatabaseHelper
 {
@@ -97,7 +99,7 @@ class DatabaseHelper
 
     public function save()
     {
-        if(method_exists($this, 'savePre')) {
+        if (method_exists($this, 'savePre')) {
             call_user_func_array([$this, 'savePre'], []);
         };
         if (isset($this->searchString)) {
@@ -107,51 +109,56 @@ class DatabaseHelper
 
         // create a new entry
         $db = new DBConnector();
-        if (is_null($this->getID())) {
-            $query = 'INSERT INTO ' . strtolower(self::getClassName()) . 's (';
-            $valueString = '';
-            foreach ($this as $key => $value) {
-                if ($key === 'ID') {
-                    continue;
+        try {
+            $db->beginTransaction();
+            if (is_null($this->getID())) {
+                $query = 'INSERT INTO ' . strtolower(self::getClassName()) . 's (';
+                $valueString = '';
+                foreach ($this as $key => $value) {
+                    if ($key === 'ID') {
+                        continue;
+                    }
+                    $query = $query . $key . ', ';
+                    if (is_null($value)) {
+                        $valueString = $valueString . 'NULL, ';
+                    } else {
+                        $valueString = $valueString . '\'' . $value . '\'' . ', ';
+                    }
                 }
-                $query = $query . $key . ', ';
-                if (is_null($value)) {
-                    $valueString = $valueString . 'NULL, ';
-                } else {
-                    $valueString = $valueString . '\'' . $value . '\'' . ', ';
-                }
-            }
-            $query = substr($query, 0, -2) . ') VALUES (' . substr($valueString, 0, -2) . ');';
+                $query = substr($query, 0, -2) . ') VALUES (' . substr($valueString, 0, -2) . ');';
 
-            $db->query($query);
-            $db->execute();
+                $db->query($query);
+                $db->execute();
 
-            $this->{'ID'} = (int)$db->lastInsertId();
-            return $this;
-        }
-        // update entry
-        if (!is_null($this->getID())) {
-            $query = 'UPDATE ' . strtolower(self::getClassName()) . 's SET';
-            $valueString = '';
-            $condition = '';
-            foreach ($this as $key => $value) {
-                if ($key === 'ID') {
-                    $condition = ' WHERE ID = ' . $value . ';';
-                    continue;
-                }
-                if (!is_null($value)) {
-                    $value = '\'' . $value . '\'';
-                } else {
-                    $value = 'NULL';
-                }
-                $query = $query . ' ' . $key . ' = ' . $value . ', ';
+                $this->{'ID'} = (int)$db->lastInsertId();
             }
-            $query = substr($query, 0, -2) . $condition;
-            $db->query($query);
-            $db->execute();
+            // update entry
+            if (!is_null($this->getID())) {
+                $query = 'UPDATE ' . strtolower(self::getClassName()) . 's SET';
+                $valueString = '';
+                $condition = '';
+                foreach ($this as $key => $value) {
+                    if ($key === 'ID') {
+                        $condition = ' WHERE ID = ' . $value . ';';
+                        continue;
+                    }
+                    if (!is_null($value)) {
+                        $value = '\'' . $value . '\'';
+                    } else {
+                        $value = 'NULL';
+                    }
+                    $query = $query . ' ' . $key . ' = ' . $value . ', ';
+                }
+                $query = substr($query, 0, -2) . $condition;
+                $db->query($query);
+                $db->execute();
+            }
+            $db->commit();
             return $this;
+        } catch (Exception $e) {
+            Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, $e->getMessage());
+            $db->rollback();
         }
-        return $this;
     }
 
     public function delete(): bool
@@ -173,11 +180,15 @@ class DatabaseHelper
 
     private function checkValidity(): void
     {
-        foreach ($this as $key => $value) {
-            $instanceName = '\PS\Source\Classes\\' . self::getClassName();
-            if (in_array($key, $instanceName::REQUIRED_VALUES) && is_null($this->{$key})) {
-                throw new Exception($key . ' is required!');
+        try {
+            foreach ($this as $key => $value) {
+                $instanceName = '\PS\Source\Classes\\' . self::getClassName();
+                if (in_array($key, $instanceName::REQUIRED_VALUES) && is_null($this->{$key})) {
+                    throw new Exception($key . ' is required!');
+                }
             }
+        } catch (Exception $e) {
+            Logging::getInstance()->add(Logging::LOG_TYPE_DEBUG, $e->getMessage());
         }
     }
 
