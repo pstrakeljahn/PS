@@ -17,6 +17,7 @@ class DBConnector
 	private $dbh;
 	private $error;
 	private $stmt;
+	protected $transactionCounter = 0;
 
 	public function __construct()
 	{
@@ -32,33 +33,31 @@ class DBConnector
 		}
 	}
 
-	protected $transactionCount = 0;
+	function beginTransaction()
+	{
+		if (!$this->transactionCounter++) {
+			return $this->dbh->beginTransaction();
+		}
+		return $this->transactionCounter >= 0;
+	}
 
-    protected $transactionCounter = 0;
-    function beginTransaction()
-    {
-        if(!$this->transactionCounter++)
-            return $this->dbh->beginTransaction();
-       return $this->transactionCounter >= 0;
-    }
+	function commit()
+	{
+		if (!--$this->transactionCounter) {
+			return $this->dbh->commit();
+		}
+		return $this->transactionCounter >= 0;
+	}
 
-    function commit()
-    {
-       if(!--$this->transactionCounter)
-           return $this->dbh->commit();
-       return $this->transactionCounter >= 0;
-    }
-
-    function rollback()
-    {
-        if($this->transactionCounter >= 0)
-        {
-            $this->transactionCounter = 0;
-            return $this->dbh->rollback();
-        }
-        $this->transactionCounter = 0;
-        return false;
-    }
+	function rollback()
+	{
+		if ($this->transactionCounter >= 0) {
+			$this->transactionCounter = 0;
+			return $this->dbh->rollback();
+		}
+		$this->transactionCounter = 0;
+		return false;
+	}
 
 	public function query($query)
 	{
