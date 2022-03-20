@@ -13,7 +13,7 @@ class DatabaseHelper
 
     public function getByPK(int $id)
     {
-        $table = lcfirst(self::getClassName()) . 's';
+        $table = strtolower(self::getClassName()) . 's';
         $db = new DBConnector();
         $db->query("SELECT * FROM `$table` WHERE ID =:id");
         $db->bind(':id', $id);
