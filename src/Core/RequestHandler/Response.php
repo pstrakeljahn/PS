@@ -52,6 +52,7 @@ class Response
             Logging::getInstance()->add(Logging::LOG_TYPE_ERROR, 'User does not exist');
             $response = self::BODY;
             $response['status'] = self::STATUS_SERVER_ERROR;
+            $response['error'] = 'User does not exist';
         } else {
             Logging::getInstance()->add(
                 Logging::LOG_TYPE_API,
