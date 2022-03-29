@@ -11,10 +11,10 @@ echo
                                         <input type="text" class="form-control" name="street" placeholder="Straße" value="'.(isset($_SESSION['userdata']['street']) ? $_SESSION['userdata']['street'] : "").'" required />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="zip" placeholder="PLZ" value="'.(isset($_SESSION['userdata']['zip']) ? $_SESSION['userdata']['zip'] : "").'" required />
+                                        <input type="text" class="form-control" name="zip" placeholder="PLZ" pattern="^[0-9]{5}$" value="'.(isset($_SESSION['userdata']['zip']) ? $_SESSION['userdata']['zip'] : "").'" required />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="mail" placeholder="E-Mail" value="'.(isset($_SESSION['userdata']['mail']) ? $_SESSION['userdata']['mail'] : "").'" required />
+                                        <input type="text" class="form-control" name="mail" placeholder="E-Mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="'.(isset($_SESSION['userdata']['mail']) ? $_SESSION['userdata']['mail'] : "").'" required />
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" id="sport" name="sport">
