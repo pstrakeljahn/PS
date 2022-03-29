@@ -80,7 +80,7 @@ if (count($_POST)) {
                 }
             }
             if (isset($_POST['back'])) {
-                $_SESSION['page'] = 2;
+                $_SESSION['family'] ? $_SESSION['page'] = 2 : $_SESSION['page'] = 1;
             }
             if (isset($_POST['go'])) {
                 $_SESSION['page'] = 4;
