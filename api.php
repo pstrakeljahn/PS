@@ -34,7 +34,7 @@ if (count($match)) {
     $arrUri = array_splice($arrFullUri, 2);
     $requestedRoute = implode("/", $arrUri);
 
-    $arrAvailabeRoutes = $entity = include('./page/routes/routes.php');
+    $arrAvailabeRoutes  = include('./page/routes/routes.php');
     if (isset($arrAvailabeRoutes[$requestedRoute])) {
         return include($arrAvailabeRoutes[$requestedRoute]);
     } else {
