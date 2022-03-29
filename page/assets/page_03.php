@@ -22,7 +22,7 @@ echo
             <input type="text" class="form-control" name="lastname_account" placeholder="Nachname" value="'.(isset($_SESSION['userdata']['lastname_account']) ? $_SESSION['userdata']['lastname_account'] : "").'" required />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="iban" placeholder="IBAN" value="'.(isset($iban) ? $iban : "").'" required />
+            <input type="text" class="form-control" name="iban" placeholder="IBAN" pattern="[A-Z]{2}\d{13,32}|(?=.{18,42}$)[A-Z]{2}\d{2}( )(\d{4}\1){2,7}\d{1,4}" value="'.(isset($iban) ? $iban : "").'" required />
         </div>
     </div>
     
