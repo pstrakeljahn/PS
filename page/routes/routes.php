@@ -3,5 +3,5 @@
 // This array includes all available routes
 
 return [
-    'anmelden' => './page/nice.php'
+    'anmelden' => './page/anmeldung.php'
 ];

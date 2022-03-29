@@ -55,6 +55,17 @@
     padding: 10%;
     margin-top: 10%;
 }
+
+.register .members{
+    padding-bottom: 7%;
+    padding-left: 5%;
+}
+
+.register .button{
+    padding-left: 10%;
+    padding-right: 10%;
+ }
+
 .btnRegister{
     float: right;
     margin-top: 10%;
@@ -67,6 +78,47 @@
     width: 50%;
     cursor: pointer;
 }
+
+.btnBack{
+    float: left;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #81000f;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+
+.cross {
+    background-color: #3a0107;
+    border: none;
+    color: white;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 9px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50%
+  }
+
+.btnAdd{
+    float: right;
+    margin-top: 5%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #000000;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+
 .register .nav-tabs{
     margin-top: 3%;
     border: none;
