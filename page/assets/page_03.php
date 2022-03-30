@@ -1,9 +1,6 @@
 <?php
 
-if(isset($_SESSION['userdata']['iban'])) {
-    $iban = $_SESSION['userdata']['iban'];
-    $iban = '*******' . substr($iban, -4);
-}
+$iban = $_SESSION['userdata']['iban'];
 
 echo
 '<h3 class="register-heading">Kontoinformationen</h3>
@@ -29,7 +26,7 @@ echo
 </div>
 <div class="row button">
     <div class="col-md-6">
-        <input type="submit" class="btnBack" id="back" name="back" value="Zurück" />
+        <input type="submit" class="btnBack" id="back" name="back" value="Zurück" formnovalidate/>
     </div>
     <div class="col-md-6">
         <input type="submit" class="btnRegister" id="go" name="go" value="Weiter" />

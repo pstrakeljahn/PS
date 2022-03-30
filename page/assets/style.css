@@ -92,6 +92,21 @@
     cursor: pointer;
 }
 
+.overview{
+    margin-left: 5%;
+    margin-right: 10%;
+    margin-top: 5%;
+
+}
+
+.checkButton{
+    margin-left: 5%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
 .cross {
     background-color: #3a0107;
     border: none;

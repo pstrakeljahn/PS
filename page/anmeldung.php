@@ -1,4 +1,7 @@
 <?php
+
+use PS\Source\Helper\CreateMembership;
+
 session_start();
 if (!isset($_SESSION['page'])) {
     $_SESSION['page'] = 1;
@@ -69,15 +72,7 @@ if (count($_POST)) {
 
             // Check fields
             foreach ($arrRequiredFields as $requiredFields) {
-                if ($requiredFields === 'iban') {
-                    // Workaround to not overwrite known iban
-                    $starCheck = strpos($_POST['iban'], '*');
-                    if ($starCheck === false) {
-                        $_SESSION['userdata'][$requiredFields] = strip_tags($_POST[$requiredFields]);
-                    }
-                } else {
-                    $_SESSION['userdata'][$requiredFields] = strip_tags($_POST[$requiredFields]);
-                }
+                $_SESSION['userdata'][$requiredFields] = strip_tags($_POST[$requiredFields]);
             }
             if (isset($_POST['back'])) {
                 $_SESSION['family'] ? $_SESSION['page'] = 2 : $_SESSION['page'] = 1;
@@ -88,7 +83,15 @@ if (count($_POST)) {
             break;
         // PAGE 4
         case 4:
-            // no logic yet
+            if (isset($_POST['back'])) {
+                $_SESSION['page'] = 3;
+            }
+            if (isset($_POST['go'])) {
+                $creationInstance = new CreateMembership($_SESSION);
+                if($creationInstance->isSend()) {
+                    $_SESSION['page'] = 5;
+                }
+            }
             break;
     }
 }
