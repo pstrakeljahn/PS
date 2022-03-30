@@ -46,7 +46,7 @@ echo '
 <div class="form-check checkButton">
     <input class="form-check-input" type="checkbox" value="" id="check_01" required>
     <label class="form-check-label" for="flexCheckDefault">
-    Durch meine Unterschrift erkenne ich die Satzung, Spiel- und Platzordnungen sowie Beitragsordnung als für mich
+    Ich erkenne die Satzung, Spiel- und Platzordnungen sowie Beitragsordnung als für mich
     verbindlich an. Außerdem bestätige ich, dass ich die beschriebenen Informationen <a href="https://tsv-venne.de/Mitgliedsantrag_TSV.pdf" target="_blank">zum Datenschutz / zu den
     Persönlichkeitsrechten</a> gelesen und verstanden habe.<br>
     Mit der Unterschriftsleistung erkläre(n) ich/wir mich/uns als gesetzliche(r) Vertreter bereit, für Forderungen des Vereins
@@ -61,6 +61,13 @@ echo '
     Lastschriften einzulösen.<br>
     Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des Betrages verlangen. Es
     gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
+    </label>
+</div>
+<div class="form-check checkButton">
+    <input class="form-check-input" type="checkbox" value="" id="check_03" required>
+    <label class="form-check-label" for="flexCheckChecked">
+    Ich stimme zu, dass meine personenbezogenen Daten an einen Vertreter des Vereins weitergeleitet werden. Er wird Ihre Daten nur
+    zum Zweck der Anmeldung verwenden.
     </label>
 </div>
 <div class="row button">

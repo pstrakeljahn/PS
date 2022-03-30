@@ -10,10 +10,10 @@ class Config
     const BASE_DIR = __DIR__ . '/src/';
 
     // DATABASE CONNECTION
-    const SERVERNAME = 'remotemysql.com';
-    const USERNAME = 'IPmfcZfgac';
-    const PASSWORD = 'vcXPRziApZ';
-    const DATABASE = 'IPmfcZfgac';
+    const SERVERNAME = '';
+    const USERNAME = '';
+    const PASSWORD = '';
+    const DATABASE = '';
 
     // JWT Configuration (exp in seconds / null is forever)
     const SECRET = "asjdfhkj&/(13asd";
@@ -41,4 +41,17 @@ class Config
     const ARR_SEASONKEYS = [
         '2021-22' => 29341512
     ];
+
+
+    // Mail Server information
+    const MAIL_SENDER = "TSV Venne von 1928 e.V.";
+    const MAIL_HOST = "smtp.ionos.de";
+    const MAIL_PORT = "25";
+    const MAIL_USERNAME = "";
+    const MAIL_PASSWORD = "";
+
+    // TSV register
+    const REGISTER_MAIL = '';
+    const REGISTER_SUBJECT_INTERNAL = 'Neues Mitglied';
+    const REGISTER_SUBJECT_EXTERNAL = 'Willkommen im TSV Venne';
 }

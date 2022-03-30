@@ -101,7 +101,7 @@ if (count($_POST)) {
             }
             if (isset($_POST['go'])) {
                 $creationInstance = new CreateMembership($_SESSION);
-                if($creationInstance->isSend()) {
+                if($creationInstance->send()) {
                     $_SESSION['page'] = 5;
                 }
             }
