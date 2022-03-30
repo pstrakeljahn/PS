@@ -52,7 +52,7 @@ class CreateMembership
         try {
             // Send mail to new memeber
             $mailExternal = new MailHelper();
-            $mailExternal->createMail(Config::REGISTER_MAIL, Config::REGISTER_SUBJECT_EXTERNAL, $this->bodyExternal, true);
+            $mailExternal->createMail($this->mail, Config::REGISTER_SUBJECT_EXTERNAL, $this->bodyExternal, true);
             $mailExternal->send();
 
             // Send mail to Patrick
