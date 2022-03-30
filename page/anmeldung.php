@@ -3,6 +3,16 @@
 use PS\Source\Helper\CreateMembership;
 
 session_start();
+
+// Clear session after 15min; security reasons
+if(!isset($_SESSION['timer'])) {
+    $_SESSION['timer'] = time();
+}
+
+if($_SESSION['timer'] < time() - 900) {
+    session_destroy();
+    session_start();
+}
 if (!isset($_SESSION['page'])) {
     $_SESSION['page'] = 1;
 }
@@ -32,6 +42,7 @@ if (count($_POST)) {
             if ($valid) {
                 $_SESSION['family'] ? $_SESSION['page'] = 2 : $_SESSION['page'] = 3;
             }
+            $_SESSION['timer'] = time();
             break;
         // PAGE 2
         case 2:
@@ -63,6 +74,7 @@ if (count($_POST)) {
                     $_SESSION['familyMemebers'][] = $memeberData;
                 }
             }
+            $_SESSION['timer'] = time();
             break;
         // PAGE 3
         case 3:
@@ -80,6 +92,7 @@ if (count($_POST)) {
             if (isset($_POST['go'])) {
                 $_SESSION['page'] = 4;
             }
+            $_SESSION['timer'] = time();
             break;
         // PAGE 4
         case 4:
@@ -92,6 +105,7 @@ if (count($_POST)) {
                     $_SESSION['page'] = 5;
                 }
             }
+            $_SESSION['timer'] = time();
             break;
     }
 }
