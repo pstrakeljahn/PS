@@ -10,15 +10,16 @@ class CreateMembership
 {
     public function __construct(array $session)
     {
+		$type = $session['type'];
         $userData = $session['userdata'];
         $userData['family'] = $session['family'];
         $inject = '';
-        if (isset($session['familyMemebers'])) {
+        if (isset($session['familyMembers'])) {
             $additionalStringStart = '<p><span style="text-decoration: underline;"><em>zusätzliche Familienmitglieder</em></span></p>
             <ul>';
             $additionalStringEnd = '</ul>';
             $concatString = '';
-            foreach ($session['familyMemebers'] as $member) {
+            foreach ($session['familyMembers'] as $member) {
                 $concatString = $concatString . '<li>' . $member['sport'] . ': ' . $member['lastname'] . ', ' . $member['firstname'] . ' (' . $member['date'] . ')</li>';
             }
             $inject = $additionalStringStart . $concatString . $additionalStringEnd;
@@ -33,6 +34,7 @@ class CreateMembership
         // Prepare internal mail
         $date = new DateTime();
         $this->bodyInternal = self::BODY_INTERNAL;
+		$this->bodyInternal = str_replace('###TYPE###', self::ARR_HEADLINES_INTERNAL[$type], $this->bodyInternal);
         $this->bodyInternal = str_replace('###BASICDATA###', $userData['lastname'] . ', ' . $userData['firstname'] . ' (' . $userData['date'] . ')', $this->bodyInternal);
         $this->bodyInternal = str_replace('###STREETNUMBER###', $userData['street'] . ' ' . $userData['number'], $this->bodyInternal);
         $this->bodyInternal = str_replace('###ZIPCITY###', $userData['zip'] . ' ' . $userData['city'], $this->bodyInternal);
@@ -91,7 +93,7 @@ class CreateMembership
     <p>Gruß<br>
     <em>Der Vorstand</em></p>';
 
-    const BODY_INTERNAL = '<h4>Neues Mitglied!</h4>
+	const BODY_INTERNAL = '<h4>###TYPE###</h4>
     <p><span style="text-decoration: underline;"><em>Nachname, Vorname (Geburtsdatum)</em></span></p>
     <p>###BASICDATA###</p>
     <p><span style="text-decoration: underline;"><em>Adresse</em></span></p>
@@ -109,4 +111,10 @@ class CreateMembership
     ###INJECT###
     <p>&nbsp;</p>
     <p>Gesendet um ###TIME### am ###DATE###</p>';
+
+	const ARR_HEADLINES_INTERNAL = [
+		"new" => 'Neues Mitglied',
+		"change" => 'Änderungsantrag',
+		"test" => 'Schnupperantrag'
+	];
 }

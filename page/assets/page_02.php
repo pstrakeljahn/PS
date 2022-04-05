@@ -1,9 +1,9 @@
 <?php
 
 $inject = '';
-if(count($_SESSION['familyMemebers'])) {
+if(isset($_SESSION['familyMembers']) && count($_SESSION['familyMembers'])) {
     $arrMemberDataString = array();
-    foreach($_SESSION['familyMemebers'] as $key => $member) {
+    foreach($_SESSION['familyMembers'] as $key => $member) {
         $arrMemberDataString[] = '<input type="submit" class="cross" id="'.$key.'" name="'.$key.'" value=" X " /><b>'. $member['sport'] .': '. $member['lastname'] . ', ' . $member['firstname'] . ' ('.$member['date'].')</b><br>';
     }
     foreach($arrMemberDataString as $memberDataString) {
@@ -13,8 +13,10 @@ if(count($_SESSION['familyMemebers'])) {
 }
 echo
 '<h3 class="register-heading">Familienmitglieder</h3>
-<div class="row register-form">
+<div class="register-form">
+Geben Sie die Daten Ihres Familienmitglied ein und klicken sie auf "Hinzufügen"<br><br>
 '.$inject.'
+<div class="row">
     <div class="col-md-6">
         <div class="form-group">
             <input type="text" class="form-control" name="firstname" placeholder="Vorname" value=""  />
@@ -42,6 +44,7 @@ echo
         </div>
         <input type="submit" class="btnAdd" id="add" name="add" value="Hinzufügen" />
     </div>
+</div>
 </div>
 <div class="row button">
     <div class="col-md-6">

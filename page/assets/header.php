@@ -10,6 +10,9 @@ echo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>' . file_get_contents('./page/assets/style.css') . '</style>
     <title>Werde Mitglied im TSV Venne</title>
+	<link rel="icon" href="https://tsv-venne.de/wp-content/uploads/2019/09/cropped-venne-32x32.png" sizes="32x32" />
+	<link rel="icon" href="https://tsv-venne.de/wp-content/uploads/2019/09/cropped-venne-192x192.png" sizes="192x192" />
+	<meta name="msapplication-TileImage" content="https://tsv-venne.de/wp-content/uploads/2019/09/cropped-venne-270x270.png" />
 
 </head>
 

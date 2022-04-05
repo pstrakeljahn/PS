@@ -1,7 +1,5 @@
 <?php
 
-$iban = $_SESSION['userdata']['iban'];
-
 echo
 '<h3 class="register-heading">Kontoinformationen</h3>
 <div class="row register-form">
@@ -19,7 +17,7 @@ echo
             <input type="text" class="form-control" name="lastname_account" placeholder="Nachname" value="'.(isset($_SESSION['userdata']['lastname_account']) ? $_SESSION['userdata']['lastname_account'] : "").'" required />
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="iban" placeholder="IBAN" pattern="[A-Z]{2}\d{13,32}|(?=.{18,42}$)[A-Z]{2}\d{2}( )(\d{4}\1){2,7}\d{1,4}" value="'.(isset($iban) ? $iban : "").'" required />
+            <input type="text" class="form-control" name="iban" placeholder="IBAN" pattern="[A-Z]{2}\d{13,32}|(?=.{18,42}$)[A-Z]{2}\d{2}( )(\d{4}\1){2,7}\d{1,4}" value="'.(isset($_SESSION['userdata']['iban']) ? $_SESSION['userdata']['iban'] : "").'" required />
         </div>
     </div>
     

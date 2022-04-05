@@ -1,7 +1,6 @@
 <?php
 
 use PS\Source\Helper\CreateMembership;
-
 session_start();
 
 // Clear session after 15min; security reasons
@@ -14,10 +13,17 @@ if($_SESSION['timer'] < time() - 900) {
     session_start();
 }
 if (!isset($_SESSION['page'])) {
-    $_SESSION['page'] = 1;
+    $_SESSION['page'] = 0;
 }
 if (count($_POST)) {
     switch ($_SESSION['page']) {
+		// Landing Page
+		case 0:
+			if(isset($_POST['option'])) {
+				$_SESSION['type'] = $_POST['option'] ?? 'new';
+				$_SESSION['page'] = 1;
+			}
+			break;
         // PAGE 1
         case 1:
             $arrRequiredFields = [
@@ -48,7 +54,7 @@ if (count($_POST)) {
         case 2:
             $key = array_search(' X ', $_POST);
             if (is_numeric($key)) {
-                unset($_SESSION['familyMemebers'][$key]);
+                unset($_SESSION['familyMembers'][$key]);
             } else {
                 if (isset($_POST['add'])) {
                     $_SESSION['page'] = 2;
@@ -65,13 +71,16 @@ if (count($_POST)) {
 
                 $isEmpty = false;
                 foreach ($arrRequiredFields as $requiredFields) {
+					if(!isset($_POST[$requiredFields])) {
+						$_POST[$requiredFields] = '';
+					}
                     if (empty($_POST[$requiredFields])) {
                         $isEmpty = true;
                     }
-                    $memeberData[$requiredFields] = strip_tags($_POST[$requiredFields]);
+					$memeberData[$requiredFields] = strip_tags($_POST[$requiredFields]);
                 }
                 if (!$isEmpty) {
-                    $_SESSION['familyMemebers'][] = $memeberData;
+                    $_SESSION['familyMembers'][] = $memeberData;
                 }
             }
             $_SESSION['timer'] = time();

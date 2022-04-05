@@ -1,8 +1,8 @@
 <?php
-if(count($_SESSION['familyMemebers']) && $_SESSION['family']) {
+if(count($_SESSION['familyMembers']) && $_SESSION['family']) {
     $inject = '<label for="members" class="col-sm-10 col-form-label"><strong>zusätzliche Familienmitglieder</strong></label><div class="col-sm-10">';
     $arrMemberDataString = array();
-    foreach($_SESSION['familyMemebers'] as $key => $member) {
+    foreach($_SESSION['familyMembers'] as $key => $member) {
         $arrMemberDataString[] = '<input type="text" readonly class="form-control-plaintext" id="members" value="'.$member['sport'] .': '. $member['lastname'] . ', ' . $member['firstname'] . ' ('.$member['date'].')">';
     }
     foreach($arrMemberDataString as $memberDataString) {
@@ -43,14 +43,16 @@ echo '
 </div>
   '.$inject.'
 </div>
+
+<a href="https://tsv-venne.de/verein/satzung" target="_blank">Satzung</a>
+
+
 <div class="form-check checkButton">
     <input class="form-check-input" type="checkbox" value="" id="check_01" required>
     <label class="form-check-label" for="flexCheckDefault">
-    Ich erkenne die Satzung, Spiel- und Platzordnungen sowie Beitragsordnung als für mich
-    verbindlich an. Außerdem bestätige ich, dass ich die beschriebenen Informationen <a href="https://tsv-venne.de/Mitgliedsantrag_TSV.pdf" target="_blank">zum Datenschutz / zu den
-    Persönlichkeitsrechten</a> gelesen und verstanden habe.<br>
-    Mit der Unterschriftsleistung erkläre(n) ich/wir mich/uns als gesetzliche(r) Vertreter bereit, für Forderungen des Vereins
-    aus dem Mitgliedschaftsverhältnis einzutreten.
+    Ich erkenne die <a href="https://tsv-venne.de/verein/satzung" target="_blank">Satzung</a>, Spiel- und Platzordnungen sowie <a href="https://tsv-venne.de/mitglied-werden/hinweise-zum-mitgliedsantrag" target="_blank">Beitragsordnung</a> als für mich
+    verbindlich an.<br>
+    Hiermit erkläre(n) ich/wir mich/uns als gesetzliche(r) Vertreter bereit, für Forderungen des Vereins aus dem Mitgliedschaftsverhältnis einzutreten.
     </label>
 </div>
 <div class="form-check checkButton">
